@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTblSeriesTable extends Migration
+class CreateEpisodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateTblSeriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_Series', function (Blueprint $table) {
+        Schema::create('Episodes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',50);
-            $table->mediumText('summary')->nullable();
-            $table->year('releaseYear');
-            $table->binary('posterPath')->nullable();  /* mysql blob type*/
-            $table->timestamps();
+            $table->date('airdate');
+            $table->unsignedInteger('Season_id');
+            $table->foreign('Season_id')->references('id')->on('Seasons');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateTblSeriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_Series');
+        Schema::dropIfExists('Episodes');
     }
 }
