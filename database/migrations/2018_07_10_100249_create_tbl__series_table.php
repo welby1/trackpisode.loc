@@ -16,10 +16,9 @@ class CreateTblSeriesTable extends Migration
         Schema::create('tbl_Series', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',50);
-            $table->mediumText('summary');
-            $table->integer('startYear');
-            $table->integer('endYear');
-            $table->mediumText('posterPath');  /* 16 Mb*/
+            $table->mediumText('summary')->nullable();
+            $table->year('releaseYear');
+            $table->binary('posterPath')->nullable();  /* mysql blob type*/
             $table->timestamps();
         });
     }
