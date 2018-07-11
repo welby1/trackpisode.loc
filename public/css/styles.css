@@ -1,0 +1,154 @@
+/*@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600); */
+
+body {
+	background: #EAE7DC;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+:root {
+	--mainGreenColor: #39df7f;
+}
+.customNavStyle {
+	background-color: #6B6E70;
+}
+.nav-link {
+	color: var(--mainGreenColor) !important;
+}
+.active a {
+	border-bottom: solid 1px var(--mainGreenColor);
+}
+
+
+
+/* кастомный слайдер с адаптив фото*/
+.customSidebars1:hover {background: linear-gradient(to left, rgba(76,226,139,0) 30%, rgba(76,226,139,1));}
+.customSidebars2:hover {background: linear-gradient(to right, rgba(76,226,139,0) 30%, rgba(76,226,139,1));}
+#slider {height: 350px; width: 900px;}
+#slider img {height: 350px; width: 900px;}
+#slider span {color: var(--mainGreenColor);}
+
+/* custom card near slider */
+.customCardStyle {
+	border-radius: 0;
+	border: 0;
+	width: 16rem;
+	overflow: hidden;
+	position: absolute;
+	height: 350px;
+	background: #EAE7DC;
+}
+.card-footer {border:0;	background: #EAE7DC;}
+.card-header {border:0;	background: #EAE7DC;}
+
+/* styles for ratings   */
+.ratingContainer {
+	margin-top:30px;
+}
+.ratingContainer h3 {
+	margin: auto;
+	padding-bottom: 10px;
+   text-shadow: 
+      -1px -1px 1px #111, 
+      2px 2px 1px #363636;
+}
+.customRowTopRated {
+	display: flex;
+    justify-content: space-around;
+}
+.container .customRowTopRated .col-3{
+	height: 250px;
+	padding: 0;
+}
+.imgBlock {
+	height: 165px;
+	overflow: hidden;
+}
+
+.imgBlock:hover img{
+	transform: scale3d(1.2, 1.2, 1);
+}
+
+.imgBlock img {
+	transition: all 0.5s linear;
+	transform: scale3d(1, 1, 1);
+}
+.textBlock {
+	height: 50px;
+	margin: 0;
+	font-size: 1.6em;
+}
+.ratingBlock {
+	height: 35px;
+	margin: 0;
+}
+
+.ratingList {
+	display: flex;
+	justify-content: center;
+	font-size: 1.5em;
+}
+  /*scale one star rating*/
+.ratingList:hover > span:hover {
+		transform: scale3d(1.3, 1.3, 1);
+
+}
+.imgBlock:hover > img:hover {
+	opacity: 0.9;
+}
+
+/* rating stars styles */
+.checked {
+    color: orange;
+}
+
+/* footer styles */
+.footer-basic {
+    border-top: 7px solid var(--mainGreenColor);
+	padding-top: 30px;
+	background-color: #222;
+	color: #4b4c4d;
+	margin-top: 30px;
+}
+.footer-basic h6 a {
+	color: var(--mainGreenColor);
+	text-decoration: none;
+}
+.social {
+	display: flex;
+	justify-content: center;
+}
+.social .fa {
+	color: lightgrey;
+}
+.footer-copyright {
+	padding: 15px 0;
+	margin-top: 15px;
+	opacity: 0.7;
+	background-color: #151515
+}
+
+
+/* CUSTOM scrollbar */
+.scrollbar {
+	float: left;
+	overflow-y: scroll;
+	margin-bottom: 20px;
+	padding-top: 0;
+}
+.force-overflow {
+	min-height: 450px;
+}
+#scrollbarStyle::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #EAE7DC;
+}
+#scrollbarStyle::-webkit-scrollbar {
+	width: 7px;
+	background-color: #EAE7DC;
+}
+#scrollbarStyle::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: var(--mainGreenColor);
+}

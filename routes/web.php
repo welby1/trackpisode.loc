@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/add_series', 'seriesController@showForm')->name('add_series_route');
+Route::post('/add_series', 'seriesController@addSeries');
