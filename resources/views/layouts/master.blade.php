@@ -18,7 +18,7 @@
   <body>
     @include('layouts.header')
 
-    <div class="container" style="margin-top: 60px;">
+    <div class="container" style="margin-top: 80px;">
         <div class="row justify-content-center">
             @yield('content')
         </div>
