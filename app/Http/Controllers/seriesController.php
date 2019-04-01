@@ -9,39 +9,50 @@ use App\SerieGenre;
 use DB;
 class seriesController extends Controller
 {
-	public function showForm(){
+    public function showForm(){
 
-		//data for select box
-		$genres = Genre::where('id', '>', 0)->orderBy('name', 'asc')->get();
+        //data for select box
+        $genres = Genre::where('id', '>', 0)->orderBy('name', 'asc')->get();
 
-		return view('series.showForm')->with('genres', $genres);
-	}
+        return view('series.showForm')->with('genres', $genres);
+    }
 
     public function addSeries(Request $request){
-    	$serie = new Serie;
-    	$serie_genre = new SerieGenre;
 
-    	//inserting a serie
-    	$serie->title = $request->input('title');
-    	$serie->releaseYear = $request->input('releaseYear');
-    	$serie->summary = $request->input('summary');
-    	$serie->save();
-    	//
-    	//inserting genre for serie
-    	$getTitle = $request->input('title');
-		$serie = Serie::where('title', $getTitle)->first(['id']);
-		$getValue = data_get($serie, 'id'); 		//get title value
-    	$optionValue = $request->input('genres');	//get combo box value
+        $data = $request->all();
 
-		$serie_genre->Serie_id = $getValue;
-    	$serie_genre->Genre_id = $optionValue;
-		$serie_genre->save();
-		//
+        $serie = new Serie;
+        
+        //inserting serie in Serie model
+        if(!empty($data['title'] && $data['releaseYear'] && $data['summary'])){
+            
+            $serie->title = $data['title'];
+            $serie->releaseYear = $data['releaseYear'];
+            $serie->summary = $data['summary'];
+            $serie->save();
+        }
 
+        //inserting genres in SerieGenre model
+        if(!empty($data['genres'])){
+            
+            //get serie id
+            $getTitle = $request->input('title');
+            $getSerieID = Serie::where('title', $getTitle)->first(['id']);
+            $getSerieID = data_get($getSerieID, 'id');
 
-		//echo $serie_genre; echo"<br>";
-		//var_dump($optionValue);
-    	return view('series.showForm');
+            //if selected multiple genres
+            foreach ($data['genres'] as $genre) {
 
+                $serie_genre = new SerieGenre;
+
+                $serie_genre->Serie_id = $getSerieID;
+                $serie_genre->Genre_id = $genre;
+                $serie_genre->save();
+            }
+        }
+
+        $genres = Genre::where('id', '>', 0)->orderBy('name', 'asc')->get();
+        
+        return view('series.showForm')->with('genres', $genres);
     }
 }
