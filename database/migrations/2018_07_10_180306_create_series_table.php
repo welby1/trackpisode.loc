@@ -18,7 +18,7 @@ class CreateSeriesTable extends Migration
             $table->string('title',50);
             $table->mediumText('summary')->nullable();
             $table->year('releaseYear');
-            $table->binary('posterPath')->nullable();  /* mysql blob type*/
+            $table->string('posterPath')->nullable();
             $table->timestamps();
         });
     }
