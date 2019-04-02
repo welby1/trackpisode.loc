@@ -8,16 +8,6 @@ body {
 :root {
 	--mainGreenColor: #39df7f;
 }
-.customNavStyle {
-	background-color: #6B6E70;
-}
-.nav-link {
-	color: var(--mainGreenColor) !important;
-}
-
-.active a {
-	border-bottom: solid 1px var(--mainGreenColor);
-}
 
 /* кастомный слайдер с адаптив фото*/
 .customSidebars1:hover {background: linear-gradient(to left, rgba(76,226,139,0) 30%, rgba(76,226,139,1));}
@@ -57,28 +47,6 @@ body {
 .container .customRowTopRated .col-3{
 	height: 250px;
 	padding: 0;
-}
-.imgBlock {
-	height: 165px;
-	overflow: hidden;
-}
-
-.imgBlock:hover img{
-	transform: scale3d(1.2, 1.2, 1);
-}
-
-.imgBlock img {
-	transition: all 0.5s linear;
-	transform: scale3d(1, 1, 1);
-}
-.textBlock {
-	height: 50px;
-	margin: 0;
-	font-size: 1.6em;
-}
-.ratingBlock {
-	height: 35px;
-	margin: 0;
 }
 
 .ratingList {
@@ -124,29 +92,4 @@ body {
 	margin-top: 15px;
 	opacity: 0.7;
 	background-color: #151515
-}
-
-/* CUSTOM scrollbar */
-.scrollbar {
-	float: left;
-	overflow-y: scroll;
-	margin-bottom: 20px;
-	padding-top: 0;
-}
-.force-overflow {
-	min-height: 450px;
-}
-#scrollbarStyle::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #EAE7DC;
-}
-#scrollbarStyle::-webkit-scrollbar {
-	width: 7px;
-	background-color: #EAE7DC;
-}
-#scrollbarStyle::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: var(--mainGreenColor);
 }

@@ -72,4 +72,10 @@ class seriesController extends Controller
         
         return view('series.showForm')->with('genres', $genres);
     }
+
+    public function show(){
+
+        $series = Serie::all();
+        return view('series.shows')->with('series', $series);
+    }
 }

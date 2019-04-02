@@ -20,7 +20,7 @@
   	<div class="custom-file">
   		<label class="col-lg-2 col-form-label">Poster</label>
     	<input type="file" class="custom-file-input col-lg-6" id="posterPath" name="posterPath">
-    	<label for="posterPath" class="custom-file-label col-lg-10 offset-2">Choose Image</label>
+    	<label for="posterPath" class="custom-file-label col-lg-10 offset-lg-2">Choose Image</label>
     </div>
   </div>
 
