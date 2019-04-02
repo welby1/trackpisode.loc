@@ -29,6 +29,23 @@ class seriesController extends Controller
             $serie->title = $data['title'];
             $serie->releaseYear = $data['releaseYear'];
             $serie->summary = $data['summary'];
+
+            if($request->hasFile('posterPath')){
+
+                $request->validate([
+                    'posterPath' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                ]);
+                //if input 'posterPath' valid to conditions then execute next lines 
+
+                $file = $request->file('posterPath');
+                $destinationPath = 'upload/';
+                $fileName = $file->getClientOriginalName();
+                $file->move($destinationPath, $fileName);
+
+                //insert the full path of uploaded file in the database field
+                $serie->posterPath = $destinationPath . $fileName;
+            }
+
             $serie->save();
         }
 
