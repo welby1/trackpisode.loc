@@ -19,53 +19,52 @@ class seriesController extends Controller
 
     public function addSeries(Request $request){
 
-        $data = $request->all();
-
-        $serie = new Serie;
-        
-        //inserting serie in Serie model
-        if(!empty($data['title'] && $data['releaseYear'] && $data['summary'])){
-            
-            $serie->title = $data['title'];
-            $serie->releaseYear = $data['releaseYear'];
-            $serie->summary = $data['summary'];
-
-            if($request->hasFile('posterPath')){
-
-                $request->validate([
+        $request->validate([
+                    'title' => 'required',
+                    'releaseYear' => 'required',
+                    'summary' => 'required',
+                    'genres' => 'required',
                     'posterPath' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
                 ]);
-                //if input 'posterPath' valid to conditions then execute next lines 
+        //if inputs are valid to conditions then execute next lines 
 
-                $file = $request->file('posterPath');
-                $destinationPath = 'upload/';
-                $fileName = $file->getClientOriginalName();
-                $file->move($destinationPath, $fileName);
+        $data = $request->all();
 
-                //insert the full path of uploaded file in the database field
-                $serie->posterPath = $destinationPath . $fileName;
-            }
+        if($request->hasFile('posterPath')){
 
-            $serie->save();
+            $file = $request->file('posterPath');
+            $destinationPath = 'upload/';
+            $fileName = $file->getClientOriginalName();
+            $file->move($destinationPath, $fileName);
+        } else{
+            
+            $destinationPath = 'upload/';
+            $fileName = 'default-image.jpg';
         }
 
-        //inserting genres in SerieGenre model
-        if(!empty($data['genres'])){
-            
-            //get serie id
-            $getTitle = $request->input('title');
-            $getSerieID = Serie::where('title', $getTitle)->first(['id']);
-            $getSerieID = data_get($getSerieID, 'id');
+        //add serie
+        $serie = new Serie;
 
-            //if selected multiple genres
-            foreach ($data['genres'] as $genre) {
+        $serie->title = $data['title'];
+        $serie->releaseYear = $data['releaseYear'];
+        $serie->summary = $data['summary'];
+        //insert file path in the database field
+        $serie->posterPath = $destinationPath . $fileName;
+        $serie->save();
+    
+        //get serie id
+        $getTitle = $request->input('title');
+        $getSerieID = Serie::where('title', $getTitle)->first(['id']);
+        $getSerieID = data_get($getSerieID, 'id');
 
-                $serie_genre = new SerieGenre;
+        //if selected multiple genres
+        foreach ($data['genres'] as $genre) {
+            //add genres
+            $serie_genre = new SerieGenre;
 
-                $serie_genre->Serie_id = $getSerieID;
-                $serie_genre->Genre_id = $genre;
-                $serie_genre->save();
-            }
+            $serie_genre->Serie_id = $getSerieID;
+            $serie_genre->Genre_id = $genre;
+            $serie_genre->save();
         }
 
         $genres = Genre::where('id', '>', 0)->orderBy('name', 'asc')->get();
