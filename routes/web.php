@@ -21,3 +21,4 @@ Route::get('/add_series', 'seriesController@showForm')->name('add_series_route')
 Route::post('/add_series', 'seriesController@addSeries');
 
 Route::get('/shows', 'seriesController@show')->name('shows_route');
+Route::get('/show/{id}', 'seriesController@showById');

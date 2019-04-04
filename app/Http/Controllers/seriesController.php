@@ -78,4 +78,8 @@ class seriesController extends Controller
         $series = Serie::all();
         return view('series.shows')->with('series', $series);
     }
+    public function showById($id){
+        $serie = Serie::findOrFail($id);
+        dd($serie->title,$serie->releaseYear,$serie->summary,$serie->posterPath);
+    }
 }

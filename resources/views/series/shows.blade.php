@@ -20,7 +20,7 @@
 			            </div>
 		        	</div>
 		        </div>
-		        <p class="textBlock text-center col-lg-12"><a href="{{ $s->id }}">{{ $s->title }}</a></p>
+		        <p class="textBlock text-center col-lg-12"><a href="show/{{ $s->id }}">{{ $s->title }}</a></p>
 		    </div>
 	    @endforeach
 	</div>

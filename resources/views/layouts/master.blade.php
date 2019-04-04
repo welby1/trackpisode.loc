@@ -39,6 +39,8 @@
       .imgBlock img {
         transition: all .3s linear;
         transform: scale3d(1, 1, 1);
+        height: 100%;
+        width: 100%;
       }
       .imgBlock:hover > .hover-shadow{
         width:100%;
