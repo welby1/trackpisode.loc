@@ -17,6 +17,9 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <style>
+      :root {
+        --mainGreenColor: #00d254;
+      }
       .customNavStyle {
         background-color: #6B6E70;
       }
@@ -76,6 +79,109 @@
         margin: 0;
         font-size: 1.6em;
       }
+      /* styles for ratings   */
+
+      .custom-h3 {
+        margin: auto;
+        padding-bottom: 10px;
+      }
+      .customRowTopRated {
+        display: flex;
+        justify-content: space-around;
+      }
+      .container .customRowTopRated .col-3{
+        height: 250px;
+        padding: 0;
+      }
+
+      .ratingList {
+        display: flex;
+        justify-content: center;
+        font-size: 1.5em;
+      }
+      /* footer styles */
+      .footer-basic {
+        border-top: 7px solid var(--mainGreenColor);
+        padding-top: 30px;
+        background-color: #222;
+        color: #4b4c4d;
+        bottom: 0;
+      }
+      .footer-basic h6 a {
+        color: var(--mainGreenColor);
+        text-decoration: none;
+      }
+      .social {
+        display: flex;
+        justify-content: center;
+      }
+      .social .fa {
+        color: lightgrey;
+      }
+      .footer-copyright {
+        padding: 15px 0;
+        margin-top: 15px;
+        opacity: 0.7;
+        background-color: #151515
+      }
+      /*showContent view styles*/
+      .header{
+        font-size: 25px;
+        border-left: 5px solid #ff3c2d;
+        padding: 2px 11px;
+       }
+       .title-block{
+        width: 715px;
+        height: 330px;
+        box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5);
+       }
+       .overlay-pane{
+        position: relative;
+        height: 60px;
+        width: 100%;
+        bottom: 60px;
+        background-color: rgba(0,0,0, .6);
+       }
+       .overlay-pane .ratingBlock{
+        bottom: 0;
+        height: 40px;
+        top: 10px;
+        left: 75px;
+       }
+       .overlay-pane .ratingList{
+        font-size: 40px;
+       }
+       .serie-rating-pane{
+        position: absolute;
+        height: 48px;
+        width: 48px;
+        background: #00d254;
+        left: 15px;
+        top: 6px;
+        text-align: center;
+        font-size: 20px;
+        color: #fff;
+        line-height: 47px;
+        border-radius: 3px;
+       }
+       .details-pane{
+        height: 75px;
+        width: 715px;
+        line-height: 18px;
+        margin: 25px 0 10px 0;
+       }
+       .details-pane p{
+        font-size: 16px;
+       }
+       .details-pane div{
+        margin: 0;
+        padding-left: 15px;
+       }
+       .descr-pane p{
+        padding-left: 16px;
+        text-align: justify;
+        text-indent: 25px;
+       }
     </style>
   </head>
 
@@ -83,9 +189,7 @@
     @include('layouts.header')
 
     <div class="container" style="margin-top: 80px;">
-        <div class="row justify-content-center">
-            @yield('content')
-        </div>
+      @yield('content')
     </div>
 
     @include('layouts.footer')

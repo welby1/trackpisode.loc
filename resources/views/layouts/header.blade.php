@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container">
     <a class="navbar-brand" href="/">TRACKPISODE</a>
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">

@@ -19,119 +19,118 @@
         </div>
         -->
 
-        
-    <div class="container ratingContainer">
-        <div class="row"><h3>Top Rated Shows</h3></div>
-        <div class="row customRowTopRated">
-            <div class="col-lg-4">
-                <div class="imgBlock rounded">
-                    <div class="hover-shadow"></div>
-                    <span class="show-year">2019</span>
-                    <img class="img-fluid" src="img/default-image.jpg">
+<div class="row justify-content-center">       
+    <div class="row col-lg-4"><h3 class="custom-h3">Top Rated Shows</h3></div>
+    <div class="row customRowTopRated">
+        <div class="col-lg-4">
+            <div class="imgBlock rounded">
+                <div class="hover-shadow"></div>
+                <span class="show-year">2019</span>
+                <img class="img-fluid" src="/upload/default-image.jpg">
 
-                    <div class="ratingBlock">
-                        <div class="ratingList">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                <div class="ratingBlock">
+                    <div class="ratingList">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
                     </div>
                 </div>
-                <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
             </div>
-            <div class="col-lg-4">
-                <div class="imgBlock rounded">
-                    <div class="hover-shadow"></div>
-                    <span class="show-year">2019</span>
-                    <img class="img-fluid" src="img/default-image.jpg">
+            <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
+        </div>
+        <div class="col-lg-4">
+            <div class="imgBlock rounded">
+                <div class="hover-shadow"></div>
+                <span class="show-year">2019</span>
+                <img class="img-fluid" src="/upload/default-image.jpg">
 
-                    <div class="ratingBlock">
-                        <div class="ratingList">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                <div class="ratingBlock">
+                    <div class="ratingList">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
                     </div>
                 </div>
-                <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
             </div>
-            <div class="col-lg-4">
-                <div class="imgBlock rounded">
-                    <div class="hover-shadow"></div>
-                    <span class="show-year">2019</span>
-                    <img class="img-fluid" src="img/default-image.jpg">
+            <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
+        </div>
+        <div class="col-lg-4">
+            <div class="imgBlock rounded">
+                <div class="hover-shadow"></div>
+                <span class="show-year">2019</span>
+                <img class="img-fluid" src="/upload/default-image.jpg">
 
-                    <div class="ratingBlock">
-                        <div class="ratingList">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                <div class="ratingBlock">
+                    <div class="ratingList">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
                     </div>
                 </div>
-                <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
             </div>
-            <div class="col-lg-4">
-                <div class="imgBlock rounded">
-                    <div class="hover-shadow"></div>
-                    <span class="show-year">2019</span>
-                    <img class="img-fluid" src="img/default-image.jpg">
+            <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
+        </div>
+        <div class="col-lg-4">
+            <div class="imgBlock rounded">
+                <div class="hover-shadow"></div>
+                <span class="show-year">2019</span>
+                <img class="img-fluid" src="/upload/default-image.jpg">
 
-                    <div class="ratingBlock">
-                        <div class="ratingList">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                <div class="ratingBlock">
+                    <div class="ratingList">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
                     </div>
                 </div>
-                <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
             </div>
-            <div class="col-lg-4">
-                <div class="imgBlock rounded">
-                    <div class="hover-shadow"></div>
-                    <span class="show-year">2019</span>
-                    <img class="img-fluid" src="img/default-image.jpg">
+            <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
+        </div>
+        <div class="col-lg-4">
+            <div class="imgBlock rounded">
+                <div class="hover-shadow"></div>
+                <span class="show-year">2019</span>
+                <img class="img-fluid" src="/upload/default-image.jpg">
 
-                    <div class="ratingBlock">
-                        <div class="ratingList">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                <div class="ratingBlock">
+                    <div class="ratingList">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
                     </div>
                 </div>
-                <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
             </div>
-            <div class="col-lg-4">
-                <div class="imgBlock rounded">
-                    <div class="hover-shadow"></div>
-                    <span class="show-year">2019</span>
-                    <img class="img-fluid" src="img/default-image.jpg">
+            <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
+        </div>
+        <div class="col-lg-4">
+            <div class="imgBlock rounded">
+                <div class="hover-shadow"></div>
+                <span class="show-year">2019</span>
+                <img class="img-fluid" src="/upload/default-image.jpg">
 
-                    <div class="ratingBlock">
-                        <div class="ratingList">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
+                <div class="ratingBlock">
+                    <div class="ratingList">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
                     </div>
                 </div>
-                <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
             </div>
+            <p class="textBlock text-center col-lg-12"><a href="#">Title</a></p>
         </div>
     </div>
+</div>
         
 @endsection

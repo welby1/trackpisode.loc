@@ -9,12 +9,12 @@ use App\SerieGenre;
 use DB;
 class seriesController extends Controller
 {
-    public function showForm(){
+    public function addSeriesForm(){
 
         //data for select box
         $genres = Genre::where('id', '>', 0)->orderBy('name', 'asc')->get();
 
-        return view('series.showForm')->with('genres', $genres);
+        return view('series.addSeriesForm')->with('genres', $genres);
     }
 
     public function addSeries(Request $request){
@@ -33,12 +33,12 @@ class seriesController extends Controller
         if($request->hasFile('posterPath')){
 
             $file = $request->file('posterPath');
-            $destinationPath = 'upload/';
+            $destinationPath = '/upload/';
             $fileName = $file->getClientOriginalName();
             $file->move($destinationPath, $fileName);
         } else{
-            
-            $destinationPath = 'upload/';
+
+            $destinationPath = '/upload/';
             $fileName = 'default-image.jpg';
         }
 
@@ -69,16 +69,22 @@ class seriesController extends Controller
 
         $genres = Genre::where('id', '>', 0)->orderBy('name', 'asc')->get();
         
-        return view('series.showForm')->with('genres', $genres);
+        return view('series.addSeriesForm')->with('genres', $genres);
     }
 
-    public function show(){
+    public function shows(){
 
         $series = Serie::all();
         return view('series.shows')->with('series', $series);
     }
-    public function showById($id){
+    public function showContent($id){
+        
         $serie = Serie::findOrFail($id);
-        dd($serie->title,$serie->releaseYear,$serie->summary,$serie->posterPath);
+        // SELECT Genres.name
+        // FROM Genres INNER JOIN SeriesGenres ON Genres.id = SeriesGenres.Genre_id
+        // WHERE SeriesGenres.Serie_id = $serie
+        $getGenreNamesById = Genre::select('name')->join('SeriesGenres', 'SeriesGenres.Genre_id', '=', 'Genres.id')->whereIn('Serie_id',$serie)->get();
+
+        return view('series.showContent')->with('serie', $serie)->with('genres', $getGenreNamesById);
     }
 }
