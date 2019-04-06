@@ -1,6 +1,15 @@
 @extends('layouts.master')
 @section('content')
+
 <div class="row justify-content-center">
+  @if($errors->all())
+    <div class="col-lg-8 alert alert-danger">
+      @foreach($errors->all() as $error)
+          <li>{{ $error }}</li>
+      @endforeach
+    </div>
+  @endif
+  
   <form class="col-lg-8" method="POST" id="form" action="{{ action('seriesController@addSeries') }}" enctype="multipart/form-data">
   	{{ csrf_field() }}
     <div class="form-group row">
@@ -9,12 +18,12 @@
     </div>
     <div class="form-group row">
       <label for="title" class="col-lg-2 col-form-label">Title</label>
-      <input type="text" class="form-control col-lg-10" id="title" name="title" placeholder="Title" required>
+      <input type="text" class="form-control col-lg-10" id="title" name="title" placeholder="Title"  >
     </div>
 
     <div class="form-group row">
       <label for="releaseYear" class="col-lg-2 col-form-label">Release year</label>
-      <input type="text" class="form-control col-lg-10" id="releaseYear" name="releaseYear" placeholder="Release year" maxlength="4" pattern="[0-9]+" required>
+      <input type="text" class="form-control col-lg-10" id="releaseYear" name="releaseYear" placeholder="Release year" maxlength="4" pattern="[0-9]+"  >
     </div>
 
     <div class="form-group row">
@@ -27,7 +36,7 @@
 
     <div class="form-group row">
       <label for="genres" class="col-lg-2 col-form-label">Genre</label>
-      <select id="genres" class="form-control col-lg-10" name="genres[]" required multiple>
+      <select id="genres" class="form-control col-lg-10" name="genres[]"   multiple>
   	    @foreach($genres as $g)
       		<option value="{{$g->id}}">{{$g->name}}</option>
       	@endforeach
@@ -35,7 +44,7 @@
     </div>
 
     <div class="form-group row">
-      <textarea class="form-control col-lg-12" name="summary" id="summary" rows="4" placeholder="Summary" required style="resize: none;"></textarea>
+      <textarea class="form-control col-lg-12" name="summary" id="summary" rows="4" placeholder="Summary"   style="resize: none;"></textarea>
     </div>
 
     <div class="form-group row">
@@ -44,7 +53,7 @@
   </form>
 </div>
 <script>
-	$("#submit").click(function(e) {
+	/*$("#submit").click(function(e) {
 		e.preventDefault();
 		var title = $('#title').val();
 		var releaseYear = $('#releaseYear').val();

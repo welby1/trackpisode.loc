@@ -19,8 +19,8 @@
         </div>
         -->
 
-<div class="row justify-content-center">       
-    <div class="row col-lg-4"><h3 class="custom-h3">Top Rated Shows</h3></div>
+<div class="row">       
+    <div class="row col-lg-4 offset-lg-4"><h3 class="custom-h3">Top Rated Shows</h3></div>
     <div class="row customRowTopRated">
         <div class="col-lg-4">
             <div class="imgBlock rounded">
