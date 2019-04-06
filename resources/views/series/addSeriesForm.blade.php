@@ -18,12 +18,12 @@
     </div>
     <div class="form-group row">
       <label for="title" class="col-lg-2 col-form-label">Title</label>
-      <input type="text" class="form-control col-lg-10" id="title" name="title" placeholder="Title"  >
+      <input type="text" class="form-control col-lg-10" id="title" name="title" placeholder="Title">
     </div>
 
     <div class="form-group row">
       <label for="releaseYear" class="col-lg-2 col-form-label">Release year</label>
-      <input type="text" class="form-control col-lg-10" id="releaseYear" name="releaseYear" placeholder="Release year" maxlength="4" pattern="[0-9]+"  >
+      <input type="text" class="form-control col-lg-10" id="releaseYear" name="releaseYear" placeholder="Release year" maxlength="4" pattern="[0-9]+">
     </div>
 
     <div class="form-group row">
@@ -36,7 +36,7 @@
 
     <div class="form-group row">
       <label for="genres" class="col-lg-2 col-form-label">Genre</label>
-      <select id="genres" class="form-control col-lg-10" name="genres[]"   multiple>
+      <select id="genres" class="form-control col-lg-10" name="genres[]" multiple>
   	    @foreach($genres as $g)
       		<option value="{{$g->id}}">{{$g->name}}</option>
       	@endforeach
@@ -44,7 +44,7 @@
     </div>
 
     <div class="form-group row">
-      <textarea class="form-control col-lg-12" name="summary" id="summary" rows="4" placeholder="Summary"   style="resize: none;"></textarea>
+      <textarea class="form-control col-lg-12" name="summary" id="summary" rows="4" placeholder="Summary" style="resize: none;"></textarea>
     </div>
 
     <div class="form-group row">

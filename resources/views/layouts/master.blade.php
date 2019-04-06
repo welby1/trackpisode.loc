@@ -20,6 +20,11 @@
       :root {
         --mainGreenColor: #00d254;
       }
+      /* remove outline from pagination */
+      .page-link:focus,.page-link:active {
+        outline: none !important;
+        box-shadow: none;
+      }
       .customNavStyle {
         background-color: #6B6E70;
       }
@@ -102,6 +107,7 @@
       /* footer styles */
       .footer-basic {
         border-top: 7px solid var(--mainGreenColor);
+        margin-top: 150px;
         padding-top: 30px;
         background-color: #222;
         color: #4b4c4d;

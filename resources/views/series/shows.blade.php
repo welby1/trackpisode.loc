@@ -24,5 +24,6 @@
 		    </div>
 	    @endforeach
 	</div>
+	<div class="row col-lg-12 justify-content-center mt-4">{{ $series->links() }}</div>
 </div>
 @endsection

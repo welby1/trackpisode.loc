@@ -21,7 +21,7 @@ class seriesController extends Controller
 
         $request->validate([
                     'title' => 'required',
-                    'releaseYear' => 'required',
+                    'releaseYear' => 'required|min:4',
                     'summary' => 'required',
                     'genres' => 'required',
                     'posterPath' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
@@ -74,7 +74,7 @@ class seriesController extends Controller
 
     public function shows(){
 
-        $series = Serie::all();
+        $series = Serie::paginate(6);
         return view('series.shows')->with('series', $series);
     }
     public function showContent($id){
