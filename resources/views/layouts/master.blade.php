@@ -107,7 +107,6 @@
       /* footer styles */
       .footer-basic {
         border-top: 7px solid var(--mainGreenColor);
-        margin-top: 150px;
         padding-top: 30px;
         background-color: #222;
         color: #4b4c4d;
@@ -194,7 +193,7 @@
   <body>
     @include('layouts.header')
 
-    <div class="container" style="margin-top: 80px;">
+    <div class="container" style="margin-top: 80px;padding-bottom: 170px">
       @yield('content')
     </div>
 

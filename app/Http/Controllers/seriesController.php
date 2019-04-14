@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Serie;
 use App\Genre;
 use App\SerieGenre;
+use App\Season;
 use DB;
 class seriesController extends Controller
 {
@@ -77,6 +78,7 @@ class seriesController extends Controller
         $series = Serie::paginate(6);
         return view('series.shows')->with('series', $series);
     }
+
     public function showContent($id){
         
         $serie = Serie::findOrFail($id);
@@ -87,4 +89,43 @@ class seriesController extends Controller
 
         return view('series.showContent')->with('serie', $serie)->with('genres', $getGenreNamesById);
     }
+
+    public function addSeasonsForm(){
+
+        //data for select box
+        $series = Serie::orderBy('title', 'asc')->get();
+
+        return view('series.addSeasonsForm')->with('series', $series);
+    }
+
+    public function addSeasons(Request $request){
+        $request->validate([
+                    'seasonNumber' => 'required|max:3',
+                ]);
+
+        $serie = $request->input('series');
+        $seasonNumber = $request->input('seasonNumber');
+
+        $result = Season::select('seasonNumber')->where([
+            ['Serie_id', $serie],
+            ['seasonNumber', $seasonNumber]
+        ])->get();
+
+        //checking for existance requested seasonNumber in 'Seasons' table for this serie
+        if($result->isEmpty()){
+            $season = new Season;
+            $season->seasonNumber = $request->input('seasonNumber');
+            $season->Serie_id = $request->input('series');
+            $season->save();
+
+            return redirect()->route('add_seasons_route');
+        } else{
+            //return redirect()->back()->withInput(['message' => 'Not allowed']);
+            echo "Ths season already exists for this serie";
+        }
+    }
+
+
+
+
 }
