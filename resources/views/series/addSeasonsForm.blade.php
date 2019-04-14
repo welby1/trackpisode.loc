@@ -9,6 +9,10 @@
       @endforeach
     </div>
   @endif
+
+  @isset($seasonExistsError)
+    <div class="col-lg-8 alert alert-danger"><li>{{ $seasonExistsError }}</li></div>
+  @endisset
   
   <form class="col-lg-8" method="POST" id="form" action="{{ action('seriesController@addSeasons') }}">
     {{ csrf_field() }}

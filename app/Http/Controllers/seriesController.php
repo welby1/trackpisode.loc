@@ -94,7 +94,6 @@ class seriesController extends Controller
 
         //data for select box
         $series = Serie::orderBy('title', 'asc')->get();
-
         return view('series.addSeasonsForm')->with('series', $series);
     }
 
@@ -111,7 +110,11 @@ class seriesController extends Controller
             ['seasonNumber', $seasonNumber]
         ])->get();
 
-        //checking for existance requested seasonNumber in 'Seasons' table for this serie
+        /*
+         * if requested seasonNumber doesnt exist for this serie_id in 'Seasons' table
+         * then save seasonNumber in table
+         * else show custom error message 
+         */
         if($result->isEmpty()){
             $season = new Season;
             $season->seasonNumber = $request->input('seasonNumber');
@@ -120,8 +123,10 @@ class seriesController extends Controller
 
             return redirect()->route('add_seasons_route');
         } else{
-            //return redirect()->back()->withInput(['message' => 'Not allowed']);
-            echo "Ths season already exists for this serie";
+            $series = Serie::orderBy('title', 'asc')->get();
+            $seasonExistsError = "This season already exists for this serie";
+
+            return view('series.addSeasonsForm')->with('series', $series)->with('seasonExistsError', $seasonExistsError);
         }
     }
 
