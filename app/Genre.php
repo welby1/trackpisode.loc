@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
-        protected $table = 'Genres'; //связка с таблицей
+    protected $table = 'Genres'; //связка с таблицей
 }

@@ -12,10 +12,13 @@
           <a class="nav-link" href="{{ route('home') }}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('add_series_route') }}">Add Series</a>
+          <a class="nav-link" href="{{ route('add_series_route') }}">Add Serie</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('add_seasons_route') }}">Add Season</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('add_episodes_route') }}">Add Episode</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('shows_route') }}">Shows</a>

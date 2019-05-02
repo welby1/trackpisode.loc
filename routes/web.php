@@ -22,6 +22,12 @@ Route::post('/add_series', 'seriesController@addSeries');
 Route::get('/add_seasons', 'seriesController@addSeasonsForm')->name('add_seasons_route');
 Route::post('/add_seasons', 'seriesController@addSeasons');
 
+Route::get('/add_episodes', 'seriesController@addEpisodesForm')->name('add_episodes_route');
+Route::post('/add_episodes', 'seriesController@addEpisodes');
+//ajax routes
+Route::get('/search_serie', 'seriesController@loadSeries_ajax');  // ajax method redirects to '/search'
+Route::get('/load_seasons', 'seriesController@loadSeasons_ajax'); // ajax method redirects to '/get_seasons'
+
 
 Route::get('/shows', 'seriesController@shows')->name('shows_route');
 Route::get('/show/{id}', 'seriesController@showContent');

@@ -7,6 +7,7 @@ use App\Serie;
 use App\Genre;
 use App\SerieGenre;
 use App\Season;
+use App\Episode;
 use DB;
 class seriesController extends Controller
 {
@@ -98,6 +99,7 @@ class seriesController extends Controller
     }
 
     public function addSeasons(Request $request){
+
         $request->validate([
                     'seasonNumber' => 'required|max:3',
                 ]);
@@ -109,6 +111,8 @@ class seriesController extends Controller
             ['Serie_id', $serie],
             ['seasonNumber', $seasonNumber]
         ])->get();
+
+        //todo   'seasonNumber'=> Rule::unique('Seasons')->where(function ($query){ $query->where('Serie_id', $serie); })
 
         /*
          * if requested seasonNumber doesnt exist for this serie_id in 'Seasons' table
@@ -130,7 +134,58 @@ class seriesController extends Controller
         }
     }
 
+    public function addEpisodesForm(){
 
+        return view('series.addEpisodesForm');
+    }
+
+    //post request
+    public function addEpisodes(Request $request){
+        
+        $episode = new Episode;
+        $episode->title = $request->input('episodeTitle');
+        $episode->airdate = $request->input('airdate');
+        $episode->Season_id = $request->input('seasons');
+        $episode->save();
+
+        return redirect()->route('add_episodes_route');
+    }
+
+    //load async data in suggestion list
+    public function loadSeries_ajax(Request $request){
+
+        if($request->ajax()){
+            $output = "";
+
+            //get searching value
+            $searchSerie = $request->input('searchSerie');
+
+            //select data according searching value
+            $series = Serie::where('title', 'like', '%'.$searchSerie.'%')->get();
+
+            foreach ($series as $serie) {
+                $output .= '<li class="li-custom" data-id="'.$serie->id.'">'.$serie->title.'</li>';
+            }
+            return Response($output);
+        }
+    }
+
+    //load async data in select box
+    public function loadSeasons_ajax(Request $request){
+
+        if($request->ajax()){
+            $output = "";
+
+            $getSerie_id = $request->getSerie_id;
+
+            $seasons = Season::where('Serie_id', $getSerie_id)->orderBy('seasonNumber', 'asc')->get();
+
+            foreach ($seasons as $season) {
+                $output .= '<option value="'.$season->id.'">'.$season->seasonNumber.'</option>';
+            }
+            return Response($output);
+        }
+    }
 
 
 }

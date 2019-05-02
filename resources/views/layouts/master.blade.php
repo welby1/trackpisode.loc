@@ -187,6 +187,57 @@
         text-align: justify;
         text-indent: 25px;
        }
+
+       /* add episodes drop area */
+       #droparea{
+        padding: 0;
+        overflow-y: auto;
+        height: 150px;
+        margin-top: 45px;
+        position: absolute;
+        z-index: 999;
+       }
+       #droplist{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        position: absolute;
+        z-index: 999;
+      }
+      .li-custom{
+        padding: 6px 12px;
+        background-color: #fff;
+        border-bottom:1px solid gray;
+        cursor: pointer;
+      }
+      .li-custom:hover{
+        background-color: lightgray;
+        padding-left: 17px;
+      }
+      /* scrollbar local for #droparea */
+      #droparea::-webkit-scrollbar {
+        width: 7px;
+        background-color: #b5bac0;
+        border-radius:15px; 
+      }
+      #droparea::-webkit-scrollbar-thumb{
+        background-color: #00d254;
+        border-radius: 15px;
+      }
+      /* scrollbar global */
+      ::-webkit-scrollbar {
+        width: 11px;
+        background-color: #b5bac0;
+      }
+      ::-webkit-scrollbar-thumb{
+        background-color: #00d254;
+        border-radius: 15px;
+      }
+      ::-webkit-scrollbar-thumb:hover{
+        background-color: rgb(0,210,30);
+      }
+
     </style>
   </head>
 
