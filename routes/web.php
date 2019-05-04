@@ -27,6 +27,7 @@ Route::post('/add_episodes', 'seriesController@addEpisodes');
 //ajax routes
 Route::get('/search_serie', 'seriesController@loadSeries_ajax');  // ajax method redirects to '/search'
 Route::get('/load_seasons', 'seriesController@loadSeasons_ajax'); // ajax method redirects to '/get_seasons'
+Route::post('/mark_episode', 'markEpisodeController@markEpisode_ajax');
 
 
 Route::get('/shows', 'seriesController@shows')->name('shows_route');

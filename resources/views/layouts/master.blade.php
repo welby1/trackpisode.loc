@@ -187,6 +187,44 @@
         text-align: justify;
         text-indent: 25px;
        }
+       .seasons-list{
+        border-collapse: collapse;
+        background: #f1f1f1;
+       }
+       .seasons-list td{
+        border: 1px solid #fff;
+        vertical-align: middle;
+        color: #1f1f1f;
+        padding: 8px 10px;
+       }
+       .placeholder{
+        width: 14px !important;
+        padding: 0 !important;
+       }
+       .haveseen-area{
+        width: 30px !important;
+       }
+       .episode-number{
+        width: 10%;
+       }
+       .episode-title{
+        width: 60%;
+       }
+       .episode-airdate{
+        width: 20%;
+       }
+       .haveseen-btn{
+        border-radius: 3px;
+        border: 2px solid #745ec5;
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        background: url(/img/pink-eye-icon.png) center no-repeat;
+       }
+       .active-eye{
+        background: url(/img/white-eye-icon.png) center no-repeat;
+        background-color: #745ec5;
+       }
 
        /* add episodes drop area */
        #droparea{

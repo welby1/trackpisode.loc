@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
 use App\Serie;
 use App\Genre;
 use App\SerieGenre;
 use App\Season;
 use App\Episode;
+use App\UserEpisode;
 use DB;
 class seriesController extends Controller
 {
@@ -83,12 +86,36 @@ class seriesController extends Controller
     public function showContent($id){
         
         $serie = Serie::findOrFail($id);
+
         // SELECT Genres.name
         // FROM Genres INNER JOIN SeriesGenres ON Genres.id = SeriesGenres.Genre_id
         // WHERE SeriesGenres.Serie_id = $serie
         $getGenreNamesById = Genre::select('name')->join('SeriesGenres', 'SeriesGenres.Genre_id', '=', 'Genres.id')->whereIn('Serie_id',$serie)->get();
 
-        return view('series.showContent')->with('serie', $serie)->with('genres', $getGenreNamesById);
+        $getSeasons = Season::select('seasonNumber')->whereIn('Serie_id', $serie)->get();
+
+        $getEpisodes = Episode::select('Episodes.*','Seasons.seasonNumber')
+            ->join('Seasons', 'Seasons.id', '=', 'Episodes.Season_id')
+            ->join('Series', 'Series.id', '=', 'Seasons.Serie_id')
+            ->whereIn('Series.id',$serie)
+            ->get();
+
+        $i=1; //using to iterate episodes
+
+        $user_id = Auth::id();
+        $getMarkedUserEpisodes = UserEpisode::select('Episode_id')
+            ->where('User_id', '=', $user_id)
+            ->orderBy('Episode_id', 'asc')
+            ->get();
+
+        return view('series.showContent', array(
+            'serie' => $serie,
+            'genres' => $getGenreNamesById,
+            'seasons' => $getSeasons,
+            'episodes' => $getEpisodes,
+            'i' => $i,
+            'markedEpisodes' => $getMarkedUserEpisodes
+        ));
     }
 
     public function addSeasonsForm(){
