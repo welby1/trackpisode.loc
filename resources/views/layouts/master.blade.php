@@ -20,6 +20,10 @@
       :root {
         --mainGreenColor: #00d254;
       }
+      /* highlight selection color */
+      *::selection {
+        background: rgba(0,210,84,.4);
+      }
       /* remove outline from pagination */
       .page-link:focus,.page-link:active {
         outline: none !important;
@@ -84,6 +88,10 @@
         margin: 0;
         font-size: 1.6em;
       }
+      .textBlock a {
+        color: #000;
+        text-decoration: none;
+      }
       /* styles for ratings   */
 
       .custom-h3 {
@@ -135,28 +143,28 @@
         border-left: 5px solid #ff3c2d;
         padding: 2px 11px;
        }
-       .title-block{
+      .title-block{
         width: 715px;
         height: 330px;
         box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5);
        }
-       .overlay-pane{
+      .overlay-pane{
         position: relative;
         height: 60px;
         width: 100%;
         bottom: 60px;
         background-color: rgba(0,0,0, .6);
        }
-       .overlay-pane .ratingBlock{
+      .overlay-pane .ratingBlock{
         bottom: 0;
         height: 40px;
         top: 10px;
         left: 75px;
        }
-       .overlay-pane .ratingList{
+      .overlay-pane .ratingList{
         font-size: 40px;
        }
-       .serie-rating-pane{
+      .serie-rating-pane{
         position: absolute;
         height: 48px;
         width: 48px;
@@ -169,51 +177,51 @@
         line-height: 47px;
         border-radius: 3px;
        }
-       .details-pane{
+      .details-pane{
         height: 75px;
         width: 715px;
         line-height: 18px;
         margin: 25px 0 10px 0;
        }
-       .details-pane p{
+      .details-pane p{
         font-size: 16px;
        }
-       .details-pane div{
+      .details-pane div{
         margin: 0;
         padding-left: 15px;
        }
-       .descr-pane p{
+      .descr-pane p{
         padding-left: 16px;
         text-align: justify;
         text-indent: 25px;
        }
-       .seasons-list{
+      .seasons-list{
         border-collapse: collapse;
         background: #f1f1f1;
        }
-       .seasons-list td{
+      .seasons-list td{
         border: 1px solid #fff;
         vertical-align: middle;
         color: #1f1f1f;
         padding: 8px 10px;
        }
-       .placeholder{
+      .placeholder{
         width: 14px !important;
         padding: 0 !important;
        }
-       .haveseen-area{
+      .haveseen-area{
         width: 30px !important;
        }
-       .episode-number{
+      .episode-number{
         width: 10%;
        }
-       .episode-title{
+      .episode-title{
         width: 60%;
        }
-       .episode-airdate{
+      .episode-airdate{
         width: 20%;
        }
-       .haveseen-btn{
+      .haveseen-btn{
         border-radius: 3px;
         border: 2px solid #745ec5;
         width: 26px;
@@ -221,13 +229,43 @@
         cursor: pointer;
         background: url(/img/pink-eye-icon.png) center no-repeat;
        }
-       .active-eye{
+      .active-eye{
         background: url(/img/white-eye-icon.png) center no-repeat;
         background-color: #745ec5;
        }
+       /* drop area for header */
+      #header-droparea{
+        padding: 0;
+        overflow-y: auto;
+        height: 150px;
+        margin-top: 103px;
+        position: absolute;
+        z-index: 999;
+       }
+      #header-droplist{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        position: absolute;
+        z-index: 999;
+      }
+      #header-droplist a{
+        color: var(--mainGreenColor);
+      }
+      /* scrollbar for suggestion list header*/
+      #header-droparea::-webkit-scrollbar {
+        width: 7px;
+        background-color: #b5bac0;
+        border-radius:15px; 
+      }
+      #header-droparea::-webkit-scrollbar-thumb{
+        background-color: #00d254;
+        border-radius: 15px;
+      }
 
        /* add episodes drop area */
-       #droparea{
+      #droparea{
         padding: 0;
         overflow-y: auto;
         height: 150px;
@@ -235,7 +273,7 @@
         position: absolute;
         z-index: 999;
        }
-       #droplist{
+      #droplist{
         margin: 0;
         padding: 0;
         list-style: none;
@@ -253,7 +291,7 @@
         background-color: lightgray;
         padding-left: 17px;
       }
-      /* scrollbar local for #droparea */
+      /* scrollbar for suggestion list */
       #droparea::-webkit-scrollbar {
         width: 7px;
         background-color: #b5bac0;

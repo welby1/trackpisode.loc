@@ -56,7 +56,7 @@
   
   $(document).ready(function(){
 
-    //send input value to the route '/search' which calls controller's method 'loadSeries_ajax'
+    //send input value to the route '/search_serie' which calls controller's method 'loadSeries_ajax'
     $("#searchSerie").keyup(function(){
       var searchSerie = $("#searchSerie").val();
       if(searchSerie != ""){
@@ -94,6 +94,15 @@
       var getSerie_id = $(this).attr("data-id");
       var getText = $(this).text();
       $("#searchSerie").val(getText);
+      //after clicking on suggestion 'li' when focus input again will be this suggestion or some like this
+      $.ajax({
+          url: '{{URL::to('search_serie')}}',
+          data: { 'searchSerie': getText },
+          type: 'get',
+          success: function(data){
+            $("#droplist").html(data);
+          }
+      });
 
       //after click on suggestion list item  load seasons for the item  
       if(getSerie_id != ""){

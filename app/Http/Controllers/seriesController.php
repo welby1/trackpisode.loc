@@ -183,15 +183,31 @@ class seriesController extends Controller
 
         if($request->ajax()){
             $output = "";
-
-            //get searching value
             $searchSerie = $request->input('searchSerie');
+            $searchHeaderSerie = $request->input('searchHeaderSerie');
 
-            //select data according searching value
-            $series = Serie::where('title', 'like', '%'.$searchSerie.'%')->get();
+            //when searching serie on 'adding episode' page
+            if(isset($searchSerie)){
+                //get searching value
+                $searchSerie = $request->input('searchSerie');
+                //select data according searching value
+                $series = Serie::where('title', 'like', '%'.$searchSerie.'%')->get();
 
-            foreach ($series as $serie) {
-                $output .= '<li class="li-custom" data-id="'.$serie->id.'">'.$serie->title.'</li>';
+                foreach ($series as $serie) {
+                    $output .= '<li class="li-custom" data-id="'.$serie->id.'">'.$serie->title.'</li>';
+                }
+            }
+            //when searching serie from the header input
+            else if(isset($searchHeaderSerie)){
+                //get searching value
+                $searchHeaderSerie = $request->input('searchHeaderSerie');
+                //select data according searching value
+                $series = Serie::where('title', 'like', '%'.$searchHeaderSerie.'%')->get();
+
+                foreach ($series as $serie) {
+                    $output .= '<li class="li-custom" data-id="'.$serie->id.'"><a href="/show/'.$serie->id.'">'.$serie->title.'</a></li>';
+                    // <li data-id="{id}"><a href="shows/{id}">text</a></li>
+                }
             }
             return Response($output);
         }

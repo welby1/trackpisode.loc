@@ -23,13 +23,14 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('shows_route') }}">Shows</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">item</a>
-        </li>
       </ul>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form class="form-inline col-lg-5" style="padding: 0">
+        <input class="form-control col-lg-12" style="padding-right: 17%" type="text" id="headerSearch" name="headerSearch" placeholder="Search" aria-label="Search" autocomplete="off">
+        <button class="btn btn-outline-success offset-lg-10 col-lg-2" style="position: absolute" type="submit"><span class="fa fa-search"></span></button>
+        <div class="col-lg-12" id="header-droparea">
+          <ul id="header-droplist">
+          </ul>
+        </div>
       </form>
     </div>
 
@@ -77,4 +78,57 @@
       }
     });
    });
+</script>
+<script>
+  $(document).ready(function(){
+    var searchHeaderSerie;
+    //send input value to the route '/search_serie' which calls controller's method 'loadSeries_ajax'
+    $("#headerSearch").keyup(function(){
+      searchHeaderSerie = $("#headerSearch").val();
+      if(searchHeaderSerie != ""){
+        $.ajax({
+          url: '{{URL::to('search_serie')}}',
+          data: { 'searchHeaderSerie': searchHeaderSerie },
+          type: 'get',
+          success: function(data){
+            $("#header-droplist").html(data);
+            $("#header-droparea").fadeIn();
+          }
+        });
+      } else{
+        $("#header-droparea").fadeOut();
+      }
+    });
+
+    //hide list elements
+    $("#headerSearch").blur(function(){
+      $("#header-droparea").fadeOut();
+    });
+
+    //show list elements
+    $("#headerSearch").focus(function(){
+      if(searchHeaderSerie != ""){
+        $("#header-droparea").fadeIn();
+      } else{
+        $("#header-droparea").fadeOut();
+      }
+    });
+
+    //set value for input & get value of 'data-id' attribute
+    $("#header-droplist").on("click", "li", function(){
+      var getSerie_id = $(this).attr("data-id");
+      var getText = $(this).text();
+      $("#headerSearch").val(getText);
+      //after clicking on suggestion 'li' when focus input again will be this suggestion or some like this
+      $.ajax({
+          url: '{{URL::to('search_serie')}}',
+          data: { 'searchHeaderSerie': getText },
+          type: 'get',
+          success: function(data){
+            $("#header-droplist").html(data);
+          }
+      });
+    });
+
+  });
 </script>
