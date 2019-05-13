@@ -11,6 +11,7 @@ use App\SerieGenre;
 use App\Season;
 use App\Episode;
 use App\UserEpisode;
+use App\Rating;
 use DB;
 class seriesController extends Controller
 {
@@ -101,12 +102,23 @@ class seriesController extends Controller
             ->get();
 
         $i=1; //using to iterate episodes
-
         $user_id = Auth::id();
+
         $getMarkedUserEpisodes = UserEpisode::select('Episode_id')
             ->where('User_id', '=', $user_id)
             ->orderBy('Episode_id', 'asc')
             ->get();
+
+        // getting serie rating
+        $sumVotes = Rating::select('vote')->whereIn('Serie_id', $serie)->sum('vote');
+        $countVotes = Rating::select('vote')->whereIn('Serie_id', $serie)->count();
+        $countVotes == 0 ? $getRating = 0 : $getRating = number_format($sumVotes / $countVotes, 1);
+
+        // getting the user's vote
+        $userVote = Rating::where([
+            ['User_id', $user_id],
+            ['Serie_id', $serie->id]
+        ])->get();
 
         return view('series.showContent', array(
             'serie' => $serie,
@@ -114,7 +126,10 @@ class seriesController extends Controller
             'seasons' => $getSeasons,
             'episodes' => $getEpisodes,
             'i' => $i,
-            'markedEpisodes' => $getMarkedUserEpisodes
+            'markedEpisodes' => $getMarkedUserEpisodes,
+            'serieRating' => $getRating,
+            'totalVoted' => $countVotes,
+            'userVote' => $userVote->toArray()
         ));
     }
 

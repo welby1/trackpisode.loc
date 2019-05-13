@@ -63,7 +63,7 @@
         z-index: 99;
         transition: all .3s linear;
       }
-      .show-year{
+      .show-year, .show-rating{
         position: absolute;
         top: 10px;
         right: 10px;
@@ -75,7 +75,10 @@
         font-weight: 600;
         font-size: 13px;
         background-color: rgba(255, 235, 59, 0.8);
+        cursor: default;
       }
+      .show-rating{ top:40px !important; }
+
       .ratingBlock {
         height: 35px;
         position: absolute;
@@ -97,6 +100,7 @@
       .custom-h3 {
         margin: auto;
         padding-bottom: 10px;
+        cursor: default;
       }
       .customRowTopRated {
         display: flex;
@@ -142,6 +146,20 @@
         font-size: 25px;
         border-left: 5px solid #ff3c2d;
         padding: 2px 11px;
+        cursor: default;
+        width: 100%;
+       }
+      .accordion{
+        background-color: #cccccc;
+        cursor: pointer;
+        transition: 0.4s;
+       }
+      .active-accordion, .accordion:hover{
+        background-color: #aaaaaa;
+       }
+      .accordion-panel{
+        display: none;
+        overflow: hidden;
        }
       .title-block{
         width: 715px;
@@ -157,12 +175,23 @@
        }
       .overlay-pane .ratingBlock{
         bottom: 0;
-        height: 40px;
-        top: 10px;
+        height: 30px;
+        top: 15px;
         left: 75px;
        }
       .overlay-pane .ratingList{
-        font-size: 40px;
+        font-size: 30px;
+       }
+       /* rating stars styles */
+      .checked {
+        color: orange;
+       }
+       .hover-star{
+        color: yellow;
+       }
+       /*scale one star rating*/
+      .ratingList span:hover {
+        transform: scale3d(1.3, 1.3, 1);
        }
       .serie-rating-pane{
         position: absolute;
@@ -176,12 +205,14 @@
         color: #fff;
         line-height: 47px;
         border-radius: 3px;
+        cursor: default;
        }
       .details-pane{
         height: 75px;
         width: 715px;
         line-height: 18px;
         margin: 25px 0 10px 0;
+        cursor: default;
        }
       .details-pane p{
         font-size: 16px;
@@ -204,6 +235,7 @@
         vertical-align: middle;
         color: #1f1f1f;
         padding: 8px 10px;
+        cursor: default;
        }
       .placeholder{
         width: 14px !important;
@@ -241,6 +273,7 @@
         margin-top: 103px;
         position: absolute;
         z-index: 999;
+        display: none;
        }
       #header-droplist{
         margin: 0;
@@ -300,6 +333,10 @@
       #droparea::-webkit-scrollbar-thumb{
         background-color: #00d254;
         border-radius: 15px;
+      }
+      /* search button effect in navbar */
+      .btn-outline-success:hover > .fa-search{
+        transform: scale(1.4);
       }
       /* scrollbar global */
       ::-webkit-scrollbar {

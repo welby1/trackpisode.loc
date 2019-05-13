@@ -9,16 +9,6 @@
 		        	<div class="hover-shadow"></div>
 		        	<span class="show-year">{{ $s->releaseYear }}</span>
 		            <img class="img-fluid" src="{{ $s->posterPath }}">
-
-		            <div class="ratingBlock">
-			            <div class="ratingList">
-			                <span class="fa fa-star checked"></span>
-			                <span class="fa fa-star checked"></span>
-			                <span class="fa fa-star checked"></span>
-			                <span class="fa fa-star checked"></span>
-			                <span class="fa fa-star"></span>
-			            </div>
-		        	</div>
 		        </div>
 		        <p class="textBlock text-center col-lg-12"><a href="show/{{ $s->id }}">{{ $s->title }}</a></p>
 		    </div>

@@ -1,20 +1,28 @@
 @extends('layouts.master')
 @section('content')
 <div class="row col-lg-8">
-	<h2 class="header" data-serieid="{{ $serie->id }}">{{ $serie->title }}</h2>
+	<h2 class="header" id="serie-Header" data-serieid="{{ $serie->id }}">{{ $serie->title }}</h2>
 </div>
 
 <div class="row col-lg-8">
 	<div class="title-block">
 		<img class="img-fluid" src="{{ $serie->posterPath }}" style="width: 100%;height: 100%">
-		<div class="overlay-pane"><div class="serie-rating-pane">6</div>
+		<div class="overlay-pane">
+			<div class="serie-rating-pane" id="serie_rating" title="Voted {{$totalVoted}}">{{ $serieRating }}</div>
 			<div class="ratingBlock">
 	            <div class="ratingList">
-	                <span class="fa fa-star checked"></span>
-	                <span class="fa fa-star checked"></span>
-	                <span class="fa fa-star checked"></span>
-	                <span class="fa fa-star checked"></span>
-	                <span class="fa fa-star"></span>
+	            	{{-- Add stars with '.checked' class if user voted already else add it without --}}
+	            	@for ($k = 1; $k <= 10; $k++)
+		            	@if(count($userVote))
+		            		@if($k <= $userVote[0]['vote'])
+		                		<span class="fa fa-star checked" data-value="{{$k}}" title="{{$k}}"></span>
+		                	@else
+		                		<span class="fa fa-star" data-value="{{$k}}" title="{{$k}}"></span>
+		                	@endif
+		                @else
+		                	<span class="fa fa-star" data-value="{{$k}}" title="{{$k}}"></span>
+		                @endif
+	                @endfor
 	            </div>
 	        </div>
 		</div>
@@ -42,10 +50,10 @@
 @if(count($seasons))
 	@foreach ($seasons as $season)
 	<div class="row col-lg-8">
-		<h2 class="header">Season {{ $season->seasonNumber }}</h2>
+		<h2 class="header accordion">Season {{ $season->seasonNumber }}</h2>
 	</div>
 
-	<div class="row col-lg-8 table-responsive">
+	<div class="row col-lg-8 table-responsive accordion-panel">
 		<table cellpadding="0" cellspacing="0" width="100%" class="table seasons-list">
 			@foreach ($episodes as $episode)
 				{{-- check to show episodes for corresponding seasons --}}
@@ -70,7 +78,7 @@
 					</td>
 					<td class="episode-number">{{ $loop->parent->iteration }}x{{ $i++ }}</td>
 					<td class="episode-title">{{ $episode->title }}</td>
-					<td class="episode-airdate">{{ $episode->airdate }}</td>
+					<td class="episode-airdate">{{ date('d.m.Y', strtotime($episode->airdate)) }}</td>
 					<td class="placeholder"></td>
 				</tr>
 				@endif
@@ -79,7 +87,6 @@
 		</table>
 	</div>
 	@endforeach
-	<div id="res"></div>
 @endif
 <script>
 
@@ -99,18 +106,59 @@
 
 			var episode_id = $(this).attr("data-episodeid");
 
-			//var isActive = false;
 			var isActive = $(this).hasClass("active-eye") ? "save" : "delete";
 
 			$.ajax({
 				url: '{{URL::to('mark_episode')}}',
 				data: { _token: CSRF_TOKEN, episode_id: episode_id, isActive: isActive },
+				type: 'post'
+			});
+		});
+
+		// Visualizing hover effect for rating stars
+		$(".ratingList span").on("mouseover", function(){
+			$(this).not(".checked").addClass("hover-star");
+			$(this).prevAll().addClass("hover-star");
+			$(".checked").removeClass("hover-star");
+			$(this).nextAll().removeClass("hover-star");
+		}).on("mouseout", function(){
+			$(this).parent().children("span").removeClass("hover-star");
+		});
+
+		var operation = $(".ratingList span").hasClass("checked") ? "update" : "save";
+		// Action to perform click
+		$(".ratingList span").on("click", function(){
+			// get vote value of clicked star
+			var voteValue = parseInt($(this).data("value"), 10);
+			// get value of data-serieid attribute
+			var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
+			$(this).addClass("checked");
+			$(this).prevAll().addClass("checked");
+			$(this).nextAll().removeClass("checked");
+
+			$.ajax({
+				url: '{{URL::to('save_vote')}}',
+				data: { _token: CSRF_TOKEN, Serie_id: Serie_id, voteValue: voteValue, operation: operation },
 				type: 'post',
 				success: function(data){
-					$("#res").html(data);
+					data = JSON.parse(data);
+					$("#serie_rating").html(data.rating);
 				}
 			});
 		});
+
+		// Accordion for seasons
+		$(".accordion").on("click", function(){
+			$(this).toggleClass("active-accordion");
+
+			if($(this).hasClass("active-accordion")){
+				$(this).parent().next().fadeIn();
+			} else {
+				$(this).parent().next().fadeOut();
+			}
+			
+		});
+
 	});
 </script>
 @endsection

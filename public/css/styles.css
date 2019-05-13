@@ -28,17 +28,9 @@ body {
 .card-header {border:0;	background: #EAE7DC;}
 
  
-  /*scale one star rating*/
-.ratingList:hover > span:hover {
-		transform: scale3d(1.3, 1.3, 1);
 
-}
 .imgBlock:hover > img:hover {
 	opacity: 0.9;
 }
 
-/* rating stars styles */
-.checked {
-    color: orange;
-}
 
