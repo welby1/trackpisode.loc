@@ -33,3 +33,7 @@ Route::post('/save_vote', 'RatingController@saveVote_ajax');
 
 Route::get('/shows', 'seriesController@shows')->name('shows_route');
 Route::get('/show/{id}', 'seriesController@showContent');
+
+/* Socialite authorization through Google or Vkontakte */
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');

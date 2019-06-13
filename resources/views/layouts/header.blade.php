@@ -11,6 +11,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('home') }}">Home</a>
         </li>
+        @can('isAdmin')
         <li class="nav-item">
           <a class="nav-link" href="{{ route('add_series_route') }}">Add Serie</a>
         </li>
@@ -20,6 +21,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('add_episodes_route') }}">Add Episode</a>
         </li>
+        @endcan
         <li class="nav-item">
           <a class="nav-link" href="{{ route('shows_route') }}">Shows</a>
         </li>

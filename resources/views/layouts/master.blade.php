@@ -350,14 +350,20 @@
       ::-webkit-scrollbar-thumb:hover{
         background-color: rgb(0,210,30);
       }
+      .social-sign-in{
+        border: 1px lightgray solid;
+      }
+      .social-sign-in:hover{
+        border-color: gray;
+        transition: 1.2s border-color; 
+      }
 
     </style>
   </head>
-
   <body>
     @include('layouts.header')
 
-    <div class="container" style="margin-top: 80px;padding-bottom: 170px">
+    <div class="container" style="margin-top: 80px;padding-bottom: 170px;">
       @yield('content')
     </div>
 

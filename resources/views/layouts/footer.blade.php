@@ -26,6 +26,6 @@
 		</div>
 	</div>
 	<div class="footer-copyright">
-		<div class="container-fluid">&copy; 2018 <a href="#">Trackpisode</a></div>
+		<div class="container-fluid">&copy;<?php echo date("Y"); ?><a href="#"> Trackpisode</a></div>
 	</div>
 </footer>

@@ -35,4 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+    'client_id' => '443749751829-pi12cn95pnd51usres3di7ahsdleot4p.apps.googleusercontent.com',
+    'client_secret' => 'iZkDm8uCaAkAo4l5vGMIXl1s',
+    'redirect' => 'http://trackpisode.site/login/google/callback',
+    ],
+
+    'vkontakte' => [
+    'client_id' => '7019099',
+    'client_secret' => 'H8cVeQqNg7BbcOefyuQX',
+    'redirect' => 'http://trackpisode.site/login/vkontakte/callback',
+    ],
+
 ];
