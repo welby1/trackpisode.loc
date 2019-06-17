@@ -88,6 +88,31 @@
 	</div>
 	@endforeach
 @endif
+
+<div class="row col-lg-8" style="margin-top: 35px;">
+	<h2 class="header">Comments</h2>
+</div>
+<div class="row col-lg-8 mt-5">
+	<textarea class="form-control" rows="3" name="comment_textarea" id="comment_textarea" placeholder="Comment..."></textarea>
+	<button class="fx-sliderIn">COMMENT</button>
+</div>
+<div id="load-data">
+@foreach($comments as $comment)
+	<div class="row col-lg-8">
+		<div class="col-lg-12 descr-pane comment-template">
+			<h5>{{ $comment->name }}</h5>
+			<p>{{ $comment->body }}</p>
+			<span class="comment-time">{{date('d M Y H:i',strtotime($comment->created_at))}}</span>
+		</div>
+	</div>
+@endforeach
+	<div class="row col-lg-8" id="remove-row">
+		<button id="btn-more" data-last-comment-id="{{ $comment->id }}" class="btn-block"><h5>More Comments</h5></button>
+	</div>
+</div>
+
+
+
 <script>
 
 	$(document).ready(function(){
@@ -155,9 +180,50 @@
 				$(this).parent().next().fadeIn();
 			} else {
 				$(this).parent().next().fadeOut();
-			}
-			
+			}	
 		});
+
+		// Load more Comments on clicking button
+		$(document).on('click', '#btn-more', function(){
+
+       	var last_comment_id = $(this).data('last-comment-id');
+       	var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
+       	$("#btn-more").html("<h5>Loading....</h5>");
+	       
+	       $.ajax({
+	       		url : '{{ URL::to('comments/load/ajax') }}',
+	           	method : "POST",
+	           	data : { last_comment_id: last_comment_id, Serie_id: Serie_id, _token: CSRF_TOKEN },
+	           	success : function (data){
+	              	if(data != ''){
+	                  	$('#remove-row').remove();
+	                  	$('#load-data').append(data);
+	                } else {
+						$('#btn-more').html("<h6>No Comments</h6>");
+	                  	$('#btn-more').attr('disabled', true);
+					}
+				}
+			});
+	   	});
+
+		// Add Comment ajax
+		$('.fx-sliderIn').on('click', function(){
+
+			var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
+			var getCommentText = $('#comment_textarea').val();
+
+			$.ajax({
+				url: '{{ URL::to('comment/add/ajax') }}',
+				method: 'POST',
+				data: { Serie_id: Serie_id, getCommentText: getCommentText, _token: CSRF_TOKEN },
+				success: function(data){
+					$('#comment_textarea').val('');
+					$(data).hide().prependTo('#load-data').fadeIn('slow');
+				}
+			});
+
+		});
+
 
 	});
 </script>

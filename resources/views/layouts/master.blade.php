@@ -17,6 +17,11 @@
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <style>
+      input, button, input:focus, button:focus, button:active{
+        outline: none;
+        box-shadow: none;
+        border: none;
+      }
       :root {
         --mainGreenColor: #00d254;
       }
@@ -357,6 +362,96 @@
         border-color: gray;
         transition: 1.2s border-color; 
       }
+      /* load more comments on content page */
+      #btn-more{
+        border-radius: 0 0 9px 9px;
+        padding: 15px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+      #btn-more:hover{
+        background: silver;
+        transition: .5s background;
+      }
+      #btn-more:active{
+        background: darkgrey;
+      }
+      #comment_textarea{
+        background: #d8d8d8;
+        border-radius: 9px 9px 0 0;
+        outline: none;
+        box-shadow: none;
+        border:none;
+        border-bottom: 1px silver solid;
+        resize: none;
+        color: black;
+      }
+      #comment_textarea:focus{
+        background: #c0c0c0;
+        transition: .5s background;
+      }
+      /* comment template */
+      .comment-template{
+        margin-top: 25px;
+        background: #bfbfbf;
+        color: #262626;
+        padding: 16px;
+        border-radius: 9px 9px 0 0;
+      }
+      .comment-time{
+        color: #595959;
+        position: absolute;
+        right: 32px;
+        margin-top: -16px;
+      }
+
+      /* add comment button styles */
+      .fx-sliderIn{
+        font-size: 1.25rem;
+        line-height: 20px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        color: black;
+        background: #d8d8d8;
+        padding: 10px 10px;
+        border-radius: 0 0 9px 9px;
+      }
+      .fx-sliderIn::after{
+        background: #00d254;
+      }
+      .fx-sliderIn:active::after{
+        background: #00b94a;
+      }
+
+      [class*="fx-"]:not(.fx-dyna){
+        position: relative;
+        z-index: 1;
+        transition-delay: .2s !important;
+        overflow: hidden;
+      }
+      [class*="fx-"]:not(.fx-dyna)::after,
+      [class*="fx-"]:not(.fx-dyna)::before{
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+      }
+      .fx-sliderIn::after{
+        transition: width .5s ease-in-out;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+      }
+      .fx-sliderIn:hover::after{
+        transition: width .5s ease-in-out;
+        width: 100%;
+      }
+      /* ---------- */
 
     </style>
   </head>

@@ -12,6 +12,7 @@ use App\Season;
 use App\Episode;
 use App\UserEpisode;
 use App\Rating;
+use App\Comment;
 use DB;
 use Gate;
 class seriesController extends Controller
@@ -114,6 +115,14 @@ class seriesController extends Controller
             ['Serie_id', $serie->id]
         ])->get();
 
+        //getting serie's comments
+        $getComments = Comment::select('Comments.*', 'users.name')
+            ->join('users', 'users.id', '=', 'Comments.User_id')
+            ->where('Comments.Serie_id', '=', $id)
+            ->orderBy('Comments.created_at', 'desc')
+            ->limit(2)
+            ->get();
+
         return view('series.showContent', array(
             'serie' => $serie,
             'genres' => $getGenreNamesById,
@@ -123,7 +132,8 @@ class seriesController extends Controller
             'markedEpisodes' => $getMarkedUserEpisodes,
             'serieRating' => $getRating,
             'totalVoted' => $countVotes,
-            'userVote' => $userVote->toArray()
+            'userVote' => $userVote->toArray(),
+            'comments' => $getComments
         ));
     }
 
