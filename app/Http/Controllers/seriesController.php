@@ -120,8 +120,10 @@ class seriesController extends Controller
             ->join('users', 'users.id', '=', 'Comments.User_id')
             ->where('Comments.Serie_id', '=', $id)
             ->orderBy('Comments.created_at', 'desc')
-            ->limit(2)
+            ->limit(5)
             ->get();
+
+        $totalComments = Comment::where('Serie_id', '=', $id)->count();
 
         return view('series.showContent', array(
             'serie' => $serie,
@@ -133,7 +135,8 @@ class seriesController extends Controller
             'serieRating' => $getRating,
             'totalVoted' => $countVotes,
             'userVote' => $userVote->toArray(),
-            'comments' => $getComments
+            'comments' => $getComments,
+            'totalComments' => $totalComments
         ));
     }
 

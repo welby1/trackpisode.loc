@@ -391,6 +391,10 @@
         background: #c0c0c0;
         transition: .5s background;
       }
+      .comment-counter{
+        font-size: 1.1rem;
+        color: #595959;
+      }
       /* comment template */
       .comment-template{
         margin-top: 25px;

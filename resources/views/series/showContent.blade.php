@@ -90,7 +90,9 @@
 @endif
 
 <div class="row col-lg-8" style="margin-top: 35px;">
-	<h2 class="header">Comments</h2>
+	<h2 class="header">Comments
+		@if($totalComments > 0)<span class="comment-counter"> ({{$totalComments}})</span>@endif
+	</h2>
 </div>
 <div class="row col-lg-8 mt-5">
 	<textarea class="form-control" rows="3" name="comment_textarea" id="comment_textarea" placeholder="Comment..."></textarea>
@@ -106,9 +108,11 @@
 		</div>
 	</div>
 @endforeach
+@if(count($comments) >= 5)
 	<div class="row col-lg-8" id="remove-row">
 		<button id="btn-more" data-last-comment-id="{{ $comment->id }}" class="btn-block"><h5>More Comments</h5></button>
 	</div>
+@endif
 </div>
 
 
@@ -198,10 +202,7 @@
 	              	if(data != ''){
 	                  	$('#remove-row').remove();
 	                  	$('#load-data').append(data);
-	                } else {
-						$('#btn-more').html("<h6>No Comments</h6>");
-	                  	$('#btn-more').attr('disabled', true);
-					}
+	                }
 				}
 			});
 	   	});

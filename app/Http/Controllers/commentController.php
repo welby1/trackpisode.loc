@@ -24,7 +24,7 @@ class commentController extends Controller
             	['Comments.id', '<', $comment_id]
             ])
             ->orderBy('Comments.created_at', 'desc')
-            ->limit(2)
+            ->limit(10)
             ->get();
 
             if(!$comments->isEmpty()){
@@ -40,9 +40,21 @@ class commentController extends Controller
 								</div>';
             	}
 
-            	$output .= '<div class="row col-lg-8" id="remove-row">
-								<button id="btn-more" data-last-comment-id="'.$comment->id.'" class="btn-block"><h5>More Comments</h5></button>
-							</div>';
+                $remainingComments = Comment::where([
+                    ['id', '<', $comment->id],
+                    ['Serie_id', '=', $Serie_id]
+                ])->count();
+
+                if($remainingComments != 0){
+
+                	$output .= '<div class="row col-lg-8" id="remove-row">
+    								<button id="btn-more" data-last-comment-id="'.$comment->id.'" class="btn-block"><h5>More Comments ('.$remainingComments.')</h5></button>
+    							</div>';
+                } else{
+                    $output .= '<div class="row col-lg-8" id="remove-row">
+                                    <button id="btn-more" data-last-comment-id="'.$comment->id.'" class="btn-block" disabled><h6>No Comments</h6></button>
+                                </div>';
+                }
 				echo $output;
             }	    	
 	    }
