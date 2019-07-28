@@ -27,6 +27,21 @@
 	        </div>
 		</div>
 	</div>
+
+	<div class="row col-lg-12 statusBlockButtons">
+		@if(count($serieStatus))
+			<span class="col-lg-3 {{$serieStatus[0]['status'] == 'watching' ? 'activeStatusButton' : ''}}" data-status="watching">Watching</span>
+			<span class="col-lg-3 {{$serieStatus[0]['status'] == 'seen' ? 'activeStatusButton' : ''}}" data-status="seen">Seen</span>
+			<span class="col-lg-3 {{$serieStatus[0]['status'] == 'planning' ? 'activeStatusButton' : ''}}" data-status="planning">Planning</span>
+			<span class="col-lg-3" data-status="not_watching">Not Watching</span>
+		@else
+			<span class="col-lg-3" data-status="watching">Watching</span>
+			<span class="col-lg-3" data-status="seen">Seen</span>
+			<span class="col-lg-3" data-status="planning">Planning</span>
+			<span class="col-lg-3 activeStatusButton" data-status="not_watching">Not Watching</span>
+		@endif
+	</div>	
+
 	<div class="row details-pane">
 		<div class="row col-lg-6">
 			<p>Release: {{ $serie->releaseYear }}</p>
@@ -121,7 +136,28 @@
 
 	$(document).ready(function(){
 		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+		// Get value of data-serieid attribute
+		var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
 
+		// Saving Serie Status
+		$(".statusBlockButtons span").on("click", function(){
+			
+			// Prevent sending ajax requests on multiple clicking the same status button
+			if(!$(this).hasClass("activeStatusButton")){
+				var serieStatus = $(this).attr("data-status");
+				$.ajax({
+					url: '{{URL::to('status')}}',
+					data: {_token: CSRF_TOKEN, serieStatus: serieStatus, Serie_id: Serie_id},
+					type: 'post'
+				});
+			}
+
+			$(this).not("activeStatusButton").addClass("activeStatusButton");
+			$(this).prevAll().removeClass("activeStatusButton");
+			$(this).nextAll().removeClass("activeStatusButton");
+		});
+
+		// Marking episodes 
 		$(".haveseen-btn").on("click", function(){
 
 			$(this).toggleClass("active-eye");
@@ -159,8 +195,6 @@
 		$(".ratingList span").on("click", function(){
 			// get vote value of clicked star
 			var voteValue = parseInt($(this).data("value"), 10);
-			// get value of data-serieid attribute
-			var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
 			$(this).addClass("checked");
 			$(this).prevAll().addClass("checked");
 			$(this).nextAll().removeClass("checked");
@@ -191,7 +225,6 @@
 		$(document).on('click', '#btn-more', function(){
 
        	var last_comment_id = $(this).data('last-comment-id');
-       	var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
        	$("#btn-more").html("<h5>Loading....</h5>");
 	       
 	       $.ajax({
@@ -210,7 +243,6 @@
 		// Add Comment ajax
 		$('.fx-sliderIn').on('click', function(){
 
-			var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
 			var getCommentText = $('#comment_textarea').val();
 
 			$.ajax({
@@ -224,6 +256,8 @@
 			});
 
 		});
+
+		//
 
 
 	});

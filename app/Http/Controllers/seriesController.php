@@ -13,6 +13,7 @@ use App\Episode;
 use App\UserEpisode;
 use App\Rating;
 use App\Comment;
+use App\UserSerieStatus;
 use DB;
 use Gate;
 class seriesController extends Controller
@@ -125,6 +126,14 @@ class seriesController extends Controller
 
         $totalComments = Comment::where('Serie_id', '=', $id)->count();
 
+        // getting serie status for this user
+        $getSerieStatus = UserSerieStatus::select('status')
+            ->where([
+                ['Serie_id', $id],
+                ['User_id', Auth::id()]
+            ])
+            ->get();
+
         return view('series.showContent', array(
             'serie' => $serie,
             'genres' => $getGenreNamesById,
@@ -136,7 +145,8 @@ class seriesController extends Controller
             'totalVoted' => $countVotes,
             'userVote' => $userVote->toArray(),
             'comments' => $getComments,
-            'totalComments' => $totalComments
+            'totalComments' => $totalComments,
+            'serieStatus' => $getSerieStatus->toArray()
         ));
     }
 

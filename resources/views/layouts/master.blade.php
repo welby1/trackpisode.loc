@@ -456,6 +456,32 @@
         width: 100%;
       }
       /* ---------- */
+      /* status buttons */
+      .statusBlockButtons{
+        padding: 0;
+        margin: 0;
+      }
+      .activeStatusButton{
+        background-color: #00d254 !important;
+        color: black !important;
+        font-weight: 600;
+      }
+      .statusBlockButtons span{
+        padding: 15px 0;
+        text-align: center;
+        font-size: 1.15rem;
+        background-color: #cccccc;
+        color: #666;
+        cursor: pointer;
+        border-left: 3px solid #EAE7DC;
+        
+      }
+      .statusBlockButtons span:hover{
+        background-color: #aaaaaa;
+      }
+      .statusBlockButtons span:first-child{
+        border:none;
+      }
 
     </style>
   </head>
