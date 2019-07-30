@@ -7,7 +7,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav col-lg-7">
         <li class="nav-item">
           <a class="nav-link" href="{{ route('home') }}">Home</a>
         </li>
@@ -25,10 +25,16 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('shows_route') }}">Shows</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('myshows_route') }}">My Shows</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Ratings</a>
+        </li>
       </ul>
       <form class="form-inline col-lg-5" style="padding: 0">
-        <input class="form-control col-lg-12" style="padding-right: 17%" type="text" id="headerSearch" name="headerSearch" placeholder="Search" aria-label="Search" autocomplete="off">
-        <button class="btn btn-outline-success offset-lg-10 col-lg-2" style="position: absolute" type="submit"><span class="fa fa-search"></span></button>
+        <input class="form-control col-lg-12" type="text" id="headerSearch" name="headerSearch" placeholder="Search" aria-label="Search" autocomplete="off">
+        <button class="btn btn-outline-success offset-lg-10 col-lg-2" type="submit"><span class="fa fa-search"></span></button>
         <div class="col-lg-12" id="header-droparea">
           <ul id="header-droplist">
           </ul>

@@ -106,7 +106,7 @@
 
 <div class="row col-lg-8" style="margin-top: 35px;">
 	<h2 class="header">Comments
-		@if($totalComments > 0)<span class="comment-counter"> ({{$totalComments}})</span>@endif
+		@if($totalComments > 0)<sup class="comment-counter">{{$totalComments}}</sup>@endif
 	</h2>
 </div>
 <div class="row col-lg-8 mt-5">

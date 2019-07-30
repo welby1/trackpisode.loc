@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function(){
 Route::get('/shows', 'seriesController@shows')->name('shows_route');
 Route::get('/show/{id}', 'seriesController@showContent');
 
-
+Route::get('/my-shows', 'myshowsController@index')->name('myshows_route');
 
 /* Socialite authorization through Google or Vkontakte */
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');

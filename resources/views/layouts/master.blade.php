@@ -270,6 +270,107 @@
         background: url(/img/white-eye-icon.png) center no-repeat;
         background-color: #745ec5;
        }
+       /* user's shows table styles */
+      .tabBlock{
+        padding: 0;
+        margin:0;
+        border-bottom: 2px solid #ccc;
+        position: relative;
+
+      }
+      .tabBlock span{
+        text-align: center;
+        font-size: 1.15rem;
+        background-color: #ccc;
+        color: #666;
+        cursor: pointer;
+        padding: 10px 30px;
+        margin-bottom: -2px;
+        position: relative;
+        border: 2px solid #ccc;
+      }
+      .tabBlock span:not(:last-child){
+        border-right: none;
+      }
+      .tabBlock span:first-child{
+        margin-left: 20px;
+      }
+      .activeTabButton{
+        background-color: #EAE7DC !important;
+        color: black !important;
+        font-weight: 600;
+        border-bottom: none !important;
+        position: absolute;
+        cursor: default !important;
+      }
+
+      .myshows-list{
+        border-collapse: collapse;
+      }
+      .myshows-list td{
+        border-bottom: 3px solid #EAE7DC;
+        border-top:none;
+        vertical-align: middle;
+        color: #1f1f1f;
+        padding: 16px 20px;
+        cursor: default;
+        background: #f1f1f1;
+
+       }
+      .myshows-list tr:first-child{
+        border-bottom: 3px solid #ff3c2d;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        font-weight: 800;
+      }
+      .myshows-list tr:first-child td{
+        border: none;
+        padding: 4px 20px;
+      }
+      .myshows-list tr td:not(:first-child):not(:last-child){
+        text-align: center;
+      }
+      .showProgress{
+        overflow: hidden;
+        position: relative;
+        height: 30px;
+        color: #999;
+        text-align: left;
+      }
+      .showProgress:before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 4px solid #ccc;
+      }
+      .showProgress ._name{
+        float: left;
+        padding-right: 2.5em;
+      }
+      .showProgress ._line{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        width: 0;
+        margin: 0;
+        background: #ff3c2d;
+      }
+      .showProgress ._done{
+        float: left;
+        width: 2.5em;
+        margin-left: -3.5em;
+        text-align: right;
+        color: #ff3c2d;
+      }
+      .showProgress ._left{
+        float: right;
+        width: 2.5em;
+        text-align: right;
+      }
+
        /* drop area for header */
       #header-droparea{
         padding: 0;
@@ -339,6 +440,23 @@
         background-color: #00d254;
         border-radius: 15px;
       }
+
+      #headerSearch{
+        background-color: #eae7dc;
+        padding-right: 17%;
+        border:none;
+      }
+      #headerSearch:focus{
+        outline: none;
+        box-shadow: none;
+        border: none;
+      }
+      #navbarNav form button{
+        position: absolute;
+        outline: none;
+        border: none;
+      }
+
       /* search button effect in navbar */
       .btn-outline-success:hover > .fa-search{
         transform: scale(1.4);
