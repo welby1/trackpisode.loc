@@ -124,7 +124,7 @@
       /* footer styles */
       .footer-basic {
         border-top: 7px solid var(--mainGreenColor);
-        padding-top: 30px;
+        padding-top: 60px;
         background-color: #222;
         color: #4b4c4d;
         bottom: 0;
@@ -136,6 +136,7 @@
       .social {
         display: flex;
         justify-content: center;
+        padding: 15px;
       }
       .social .fa {
         color: lightgrey;
@@ -219,6 +220,9 @@
         margin: 25px 0 10px 0;
         cursor: default;
        }
+      .details-pane span{
+        font-weight: 700;
+       }
       .details-pane p{
         font-size: 16px;
        }
@@ -270,13 +274,13 @@
         background: url(/img/white-eye-icon.png) center no-repeat;
         background-color: #745ec5;
        }
+/* ============================================ */
        /* user's shows table styles */
       .tabBlock{
         padding: 0;
         margin:0;
         border-bottom: 2px solid #ccc;
         position: relative;
-
       }
       .tabBlock span{
         text-align: center;
@@ -302,6 +306,13 @@
         border-bottom: none !important;
         position: absolute;
         cursor: default !important;
+      }
+
+      .activeTabContent{
+        display: block !important;
+      }
+      .tabContent{
+        display: none;
       }
 
       .myshows-list{
@@ -370,7 +381,7 @@
         width: 2.5em;
         text-align: right;
       }
-
+/* ============================================ */
        /* drop area for header */
       #header-droparea{
         padding: 0;

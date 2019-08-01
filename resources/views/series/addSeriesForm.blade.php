@@ -44,6 +44,14 @@
     </div>
 
     <div class="form-group row">
+      <label for="status" class="col-lg-2 col-form-label">Status</label>
+      <select id="status" class="form-control col-lg-10" name="status" size="2">
+        <option value="Running">Running</option>
+        <option value="Ended">Ended</option>
+      </select>
+    </div>
+
+    <div class="form-group row">
       <textarea class="form-control col-lg-12" name="summary" id="summary" rows="4" placeholder="Summary" style="resize: none;"></textarea>
     </div>
 

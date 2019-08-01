@@ -37,6 +37,7 @@ class seriesController extends Controller
                     'releaseYear' => 'required|min:4',
                     'summary' => 'required',
                     'genres' => 'required',
+                    'status' => 'required',
                     'posterPath' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
                 ]);
         //if inputs are valid to conditions then execute next lines 
@@ -54,6 +55,7 @@ class seriesController extends Controller
         $serie = new Serie;
         $serie->title = $data['title'];
         $serie->releaseYear = $data['releaseYear'];
+        $serie->status = $data['status'];
         $serie->summary = $data['summary'];
         //insert file path in the database field
         $serie->posterPath = $destinationPath . $fileName;

@@ -44,13 +44,16 @@
 
 	<div class="row details-pane">
 		<div class="row col-lg-6">
-			<p>Release: {{ $serie->releaseYear }}</p>
+			<p><span>Release:</span> {{ $serie->releaseYear }}</p>
 		</div>
 		<div class="row col-lg-6">
-			<p>Genre: 	@foreach ($genres as $genre)
-							{{ $genre->name }}{{$loop->last ? '' : ', '}}
-						@endforeach
+			<p><span>Genre:</span> 	@foreach ($genres as $genre)
+										{{ $genre->name }}{{$loop->last ? '' : ', '}}
+									@endforeach
 			</p>
+		</div>
+		<div class="row col-lg-6">
+			<p><span>Status:</span> {{ $serie->status }}</p>
 		</div>
 	</div>	
 </div>
