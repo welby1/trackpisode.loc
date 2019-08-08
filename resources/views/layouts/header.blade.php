@@ -11,17 +11,6 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('home') }}">Home</a>
         </li>
-        @can('isAdmin')
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('add_series_route') }}">Add Serie</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('add_seasons_route') }}">Add Season</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('add_episodes_route') }}">Add Episode</a>
-        </li>
-        @endcan
         <li class="nav-item">
           <a class="nav-link" href="{{ route('shows_route') }}">Shows</a>
         </li>
@@ -29,7 +18,7 @@
           <a class="nav-link" href="{{ route('myshows_route') }}">My Shows</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">Ratings</a>
+          <a class="nav-link" href="/todo">Ratings</a>
         </li>
       </ul>
       <form class="form-inline col-lg-5" style="padding: 0">
@@ -59,6 +48,12 @@
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  @can('isAdmin')
+                      <a class="dropdown-item" href="{{ route('add_series_route') }}">Add Serie</a>
+                      <a class="dropdown-item" href="{{ route('add_seasons_route') }}">Add Season</a>
+                      <a class="dropdown-item" href="{{ route('add_episodes_route') }}">Add Episode</a>
+                      <div class="dropdown-divider"></div>
+                  @endcan
                       <a class="dropdown-item" href="{{ route('logout') }}"
                          onclick="event.preventDefault();
                                        document.getElementById('logout-form').submit();">

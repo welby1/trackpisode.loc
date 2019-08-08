@@ -18,7 +18,7 @@
 			    	@foreach($series as $serie)
 				    	@if($serie->UserStatus == "watching")
 							<tr class="d-flex">
-								<td class="col-5">{{ $serie->title }}</td>
+								<td class="col-5"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></td>
 								<td class="col-1">{{ $serie->releaseYear }}</td>
 								<td class="col-2">{{ $serie->status }}</td>
 								<td class="col-4">
@@ -68,7 +68,7 @@
 			    	@foreach($series as $serie)
 				    	@if($serie->UserStatus == "planning")
 							<tr class="d-flex">
-								<td class="col-5">{{ $serie->title }}</td>
+								<td class="col-5"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></td>
 								<td class="col-1">{{ $serie->releaseYear }}</td>
 								<td class="col-2">{{ $serie->status }}</td>
 								<td class="col-4">
@@ -118,7 +118,7 @@
 			    	@foreach($series as $serie)
 				    	@if($serie->UserStatus == "seen")
 							<tr class="d-flex">
-								<td class="col-5">{{ $serie->title }}</td>
+								<td class="col-5"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></td>
 								<td class="col-1">{{ $serie->releaseYear }}</td>
 								<td class="col-2">{{ $serie->status }}</td>
 								<td class="col-4">
@@ -173,6 +173,34 @@
 				$(".tabContent").removeClass("activeTabContent").eq($(this).index()).addClass("activeTabContent");
 			}
 		});
+
+		//-> Sorting Table
+		$('.myshows-list').each(function(index){
+			var tableIndex = index;
+			$(this).find('tr').eq(0).find('td').each(function(){
+				$(this).on('click', function(){
+
+					var table = $('table').eq(tableIndex);
+					var rows = table.find('tr').not(':eq(0)').toArray().sort(comparer($(this).index()));
+					this.asc = !this.asc;
+					if(this.asc){rows = rows.reverse()}
+					for (var i = 0; i < rows.length; i++){table.append(rows[i])}
+				});
+			});
+		});
+		function comparer(index){
+			return function(a, b){
+				var valA = getCellValue(a, index), valB = getCellValue(b, index)
+				return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+			}
+		}
+		function getCellValue(row, index){
+			return $(row).children('td').eq(index).text()
+		}
+		//<- Sorting Table
+
+
 	});
+
 </script>
 @endsection

@@ -326,8 +326,10 @@
         padding: 16px 20px;
         cursor: default;
         background: #f1f1f1;
-
        }
+      .myshows-list a{
+        color: black;
+      }
       .myshows-list tr:first-child{
         border-bottom: 3px solid #ff3c2d;
         margin-bottom: 10px;
@@ -337,7 +339,12 @@
       .myshows-list tr:first-child td{
         border: none;
         padding: 4px 20px;
+        cursor: pointer;
       }
+      .myshows-list tr:first-child td:hover{
+        background: rgba(203, 203, 203, 0.5);
+      }
+      
       .myshows-list tr td:not(:first-child):not(:last-child){
         text-align: center;
       }
