@@ -228,7 +228,7 @@
 		$(document).on('click', '#btn-more', function(){
 
        	var last_comment_id = $(this).data('last-comment-id');
-       	$("#btn-more").html("<h5>Loading....</h5>");
+       	$("#btn-more").html('<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size:1.75rem"></i>');
 	       
 	       $.ajax({
 	       		url : '{{ URL::to('comments/load/ajax') }}',

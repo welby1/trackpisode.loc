@@ -24,10 +24,10 @@
     <div class="row customRowTopRated">
         @foreach ($series as $serie)
             <div class="col-lg-4">
-                <div class="imgBlock rounded">
+                <div class="imgBlock rounded" onclick="document.location.href='show/{{ $serie->id }}'">
                     <div class="hover-shadow"></div>
                     <span class="show-year" title="Year">{{ $serie->releaseYear }}</span>
-                    <span class="show-rating" title="{{ $serie->numberOFvotes }}">{{ number_format($serie->rating, 1) }}</span>
+                    <span class="show-rating" title="voted {{ $serie->numberOFvotes }}">{{ number_format($serie->rating, 1) }}</span>
                     <img class="img-fluid" src="{{ $serie->posterPath }}">
                 </div>
                 <p class="textBlock text-center col-lg-12"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></p>

@@ -78,8 +78,68 @@ class seriesController extends Controller
 
     public function shows(){
 
-        $series = Serie::paginate(6);
-        return view('series.shows')->with('series', $series);
+        $series = Serie::orderBy('id', 'desc')->limit(6)->get();
+        $total_count = Serie::count();
+
+        //todo fill dropdowns with db data
+
+        return view('series.shows')->with('series', $series)->with('total_count', $total_count);
+    }
+
+    public function getMoreData(Request $request){
+
+        if($request->ajax()){
+
+            $output = '';
+            $response = array();
+            $doJoin = 0;
+            $selectedItems = json_decode($request->selectedItems, true);
+            $lastItemId = $request->lastItemId;
+
+            foreach($selectedItems as $key=>$k){
+                ($k['type'] == 'Genre') ? $doJoin = 1 : '';
+            }
+
+            $result = DB::table('Series')
+                ->select('Series.id', 'Series.releaseYear', 'Series.posterPath', 'Series.title')
+                ->where(function($q) use ($selectedItems){
+                    foreach($selectedItems as $key=>$k){
+                        $q->when($k['type'] == 'Status', function($q) use ($k){
+                            return $q->where('Series.status', 'like', $k['selected']);
+                        });
+                        $q->when($k['type'] == 'Year', function($q) use ($k){
+                            return $q->where('Series.releaseYear', $k['selected']);
+                        });
+                        $q->when($k['type'] == 'Genre', function($q) use ($k){
+                            return $q->where('Genres.name', 'like', $k['selected']);
+                        });
+                    }
+                })
+                ->where('Series.id', '<', $lastItemId)
+                ->when($doJoin == 1, function($q){
+                    return $q->join('SeriesGenres','SeriesGenres.Serie_id','=','Series.id')
+                        ->join('Genres','Genres.id','=','SeriesGenres.Genre_id');
+                })
+                ->orderBy('Series.id', 'desc')
+                ->limit(6)
+                ->get();
+
+            if(!$result->isEmpty()){
+                foreach($result as $key=>$item){
+                    $output .= '
+                        <div class="col-lg-4">
+                            <div class="imgBlock rounded" onclick="document.location.href=\'show/'.$item->id.'\'">
+                                <div class="hover-shadow"></div>
+                                <span class="show-year">'.$item->releaseYear.'</span>
+                                <img class="img-fluid" src="'.$item->posterPath.'">
+                            </div>
+                            <p class="textBlock text-center col-lg-12"><a href="show/'.$item->id.'">'.$item->title.'</a></p>
+                        </div>';
+                }
+                $response['output'] = $output;
+            }
+            return Response(json_encode($response));
+        }
     }
 
     public function showContent($id){

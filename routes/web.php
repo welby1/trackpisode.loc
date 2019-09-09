@@ -32,6 +32,8 @@ Route::get('/load_seasons', 'seriesController@loadSeasons_ajax');
 Route::post('/mark_episode', 'markEpisodeController@markEpisode_ajax');
 Route::post('/save_vote', 'RatingController@saveVote_ajax');
 Route::post('/status', 'StatusController@setStatus_ajax');
+Route::post('/filter-data', 'filterDataController@getFilteredData');
+Route::post('/get-more-data', 'seriesController@getMoreData');
 
 //ajax comment route
 Route::post('/comments/load/ajax', 'commentController@loadComments_ajax');

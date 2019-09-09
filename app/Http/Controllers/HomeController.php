@@ -9,21 +9,13 @@ use DB;
 use Auth;
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    /* authorization
     public function __construct()
     {
         $this->middleware('auth');
     }
+    */
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         // get top 6 rated series

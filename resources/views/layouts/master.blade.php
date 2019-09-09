@@ -48,6 +48,7 @@
         position:relative;
         height: 160px;
         overflow: hidden;
+        cursor: pointer;
       }
       .imgBlock:hover img{
         transform: scale3d(1.2, 1.2, 1);
@@ -109,7 +110,9 @@
       }
       .customRowTopRated {
         display: flex;
+        width: 100%;
         justify-content: space-around;
+        margin:0;
       }
       .container .customRowTopRated .col-3{
         height: 250px;
@@ -125,6 +128,7 @@
       .footer-basic {
         border-top: 7px solid var(--mainGreenColor);
         padding-top: 60px;
+        margin-top: 90px;
         background-color: #222;
         color: #4b4c4d;
         bottom: 0;
@@ -317,6 +321,7 @@
 
       .myshows-list{
         border-collapse: collapse;
+        margin-bottom: 55vh;
       }
       .myshows-list td{
         border-bottom: 3px solid #EAE7DC;
@@ -619,12 +624,112 @@
         border:none;
       }
 
+      /* Search Area Filters */
+      .filter-area{
+        background-color: #404040;
+        box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5);
+        border-radius: 0.25rem;
+        padding: 15px 20px 15px 270px;
+        margin: 0 0 30px 0;
+        user-select: none;
+      }
+      .filter-title{
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 30px;
+        letter-spacing: 3px;
+        padding-right: 25px;
+        color: #d6d6d6;
+        cursor: default;
+      }
+      .filter-box{
+        height: 30px;
+        line-height: 30px;
+        color: #e0e0e0;
+        font-weight: 600;
+        position: relative;
+        background-color: #2f2f2f;
+        margin-right: 25px;
+      }
+      .selected-item{
+        padding: 0 25px 0 18px;
+        position: relative;
+        cursor: pointer;
+      }
+      .selected-item:after{
+        content: '\f107';
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        position: absolute;
+        right:7px;
+      }
+      .list-item{
+        display: none;
+        background: #2f2f2f;
+        position: absolute;
+        max-height: 300px;
+        overflow: auto;
+        list-style: none;
+        z-index: 999;
+        box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+        left: 0;
+        margin: 0;
+        padding: 0;
+      }
+      .list-item li{
+        border-bottom: 1px solid #737373;
+        padding: 0 35px 0 18px;
+        line-height: 30px;
+        white-space: nowrap;
+        cursor: pointer;
+        font-weight: normal;
+        color: #e0e0e0;
+      }
+      .list-item li:hover{
+        background-color: lightgray;
+        color: #2f2f2f;
+        
+      }
+      .current{
+        background-color: var(--mainGreenColor);
+        color: #404040 !important;
+      }
+      #filterspinner i{
+        font-size: 25px;
+        line-height: 30px;
+        color: #ff3c2d;
+      }
+      #dataspinner i{
+        font-size: 25px;
+        line-height: 30px;
+        color: #ff3c2d;
+      }
+      #empty{
+        height: 450px;
+        margin-top: 0;
+        background: #884d4d;
+        text-align: center;
+        color: #e0e0e0;
+        font-size: 27px;
+        font-weight: 600;
+        line-height: 450px;
+        border: none;
+        cursor: default;
+        user-select: none;
+        background: url(/img/mr_bean.jpg) center no-repeat;
+      }
+      #empty p{
+        vertical-align: middle;
+      }
+
+
     </style>
   </head>
   <body>
     @include('layouts.header')
 
-    <div class="container" style="margin-top: 80px;padding-bottom: 170px;">
+    <div class="container" style="margin-top: 80px; margin-bottom: calc(100vh - 543px);">
       @yield('content')
     </div>
 
