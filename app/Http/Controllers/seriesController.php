@@ -81,9 +81,19 @@ class seriesController extends Controller
         $series = Serie::orderBy('id', 'desc')->limit(6)->get();
         $total_count = Serie::count();
 
-        //todo fill dropdowns with db data
+        // dropdowns data
+        $getYears = Serie::select('releaseYear')->orderBy('releaseYear', 'desc')->distinct()->get();
+        $getGenres = Genre::select('name')->orderBy('name', 'asc')->get();
+        $getStatuses = Serie::select('status')->orderBy('status', 'asc')->distinct()->get();
 
-        return view('series.shows')->with('series', $series)->with('total_count', $total_count);
+
+        return view('series.shows', array(
+            'series' => $series,
+            'total_count' => $total_count,
+            'years' => $getYears,
+            'genres' => $getGenres,
+            'statuses' => $getStatuses
+        ));
     }
 
     public function getMoreData(Request $request){

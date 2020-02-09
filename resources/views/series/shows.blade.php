@@ -7,27 +7,27 @@
 			<div class="selected-item" data-type="Year">Year</div>
 			<ul class="list-item">
 				<li style="display:none">Year</li>
-				<li data-value="2019">2019</li>
-				<li data-value="2018">2018</li>
-				<li data-value="2017">2017</li>
-				<li data-value="2013">2013</li>
+				@foreach ($years as $year)
+					<li data-value="{{ $year->releaseYear }}">{{ $year->releaseYear }}</li>
+				@endforeach
 			</ul>
 		</div>
 		<div class="filter-box">
 			<div class="selected-item" data-type="Genre">Genre</div>
 			<ul class="list-item">
 				<li style="display:none">Genre</li>
-				<li data-value="Action">Action</li>
-				<li data-value="Horror">Horror</li>
-				<li data-value="Thriller">Thriller</li>
+				@foreach ($genres as $genre)
+					<li data-value="{{ $genre->name }}">{{ $genre->name }}</li>
+				@endforeach
 			</ul>
 		</div>
 		<div class="filter-box">
 			<div class="selected-item" data-type="Status">Status</div>
 			<ul class="list-item">
 				<li style="display:none">Status</li>
-				<li data-value="Running">Running</li>
-				<li data-value="Ended">Ended</li>
+				@foreach ($statuses as $status)
+					<li data-value="{{ $status->status }}">{{ $status->status }}</li>
+				@endforeach
 			</ul>
 		</div>
 		<div id="filterspinner"></div>
