@@ -10,6 +10,7 @@
     </span>
     </div>
     <div class="form-group row">
+      <input type="hidden" id="serieId" name="serieId" value="">
       <label for="searchSerie" class="col-lg-2 col-form-label">Serie</label>
       <input type="text" class="form-control col-lg-10" id="searchSerie" placeholder="Title" autocomplete="off" name="searchSerie" autofocus>
       <div class="offset-lg-2 col-lg-10" id="droparea">
@@ -17,6 +18,7 @@
       </div>
     </div>
     <div class="form-group row">
+      <input type="hidden" id="seasonNumber" name="seasonNumber" value="">
       <label for="seasons" class="col-lg-2 col-form-label">Seasons</label>
       <select id="seasons" class="form-control col-lg-10" name="seasons">
         <option value="">Select serie first</option>
@@ -94,6 +96,7 @@
       var getSerie_id = $(this).attr("data-id");
       var getText = $(this).text();
       $("#searchSerie").val(getText);
+      $("#serieId").val(getSerie_id);
       //after clicking on suggestion 'li' when focus input again will be this suggestion or some like this
       $.ajax({
           url: '{{URL::to('search_serie')}}',
@@ -112,11 +115,17 @@
           type: 'get',
           success: function(data){
             $("#seasons").html(data);
+            $("#seasonNumber").val( $("#seasons option:selected").text() );
           }
         });
       } else{
         $("#seasons").html("<option value=''>Select serie first</option>");
       }
+    });
+
+    //set selected option text for input value
+    $("#seasons").on("change", function(){
+      $("#seasonNumber").val( $("#seasons option:selected").text() );
     });
 
   });

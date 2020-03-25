@@ -169,7 +169,6 @@ class seriesController extends Controller
             ->whereIn('Series.id',$serie)
             ->get();
 
-        $i=1; //using to iterate episodes
         $user_id = Auth::id();
 
         $getMarkedUserEpisodes = UserEpisode::select('Episode_id')
@@ -211,7 +210,6 @@ class seriesController extends Controller
             'genres' => $getGenreNamesById,
             'seasons' => $getSeasons,
             'episodes' => $getEpisodes,
-            'i' => $i,
             'markedEpisodes' => $getMarkedUserEpisodes,
             'serieRating' => $getRating,
             'totalVoted' => $countVotes,
@@ -281,9 +279,38 @@ class seriesController extends Controller
 
     //post request
     public function addEpisodes(Request $request){
+
+        /*
+        SELECT e.id, e.title
+        FROM Series s
+        INNER JOIN Seasons ss ON s.id = ss.Serie_id
+        INNER JOIN Episodes e ON ss.id = e.Season_id
+        WHERE s.id=12 and ss.seasonNumber=1;
+         */
+        // calculating the next episode number based on the last existing number 
+        function calc_EpisodeNumber($serie_id, $season_number){
+            $lastEpisodeNumber = Serie::select('Episodes.ep_number')
+                ->join('Seasons', 'Seasons.Serie_id', '=', 'Series.id')
+                ->join('Episodes', 'Episodes.Season_id', '=', 'Seasons.id')
+                ->where([
+                    ['Series.id', $serie_id],
+                    ['Seasons.seasonNumber', $season_number]
+                ])
+                ->orderBy('ep_number', 'desc')
+                ->first();
+
+            $episode_number = ($lastEpisodeNumber === null) ? 1 : $lastEpisodeNumber->ep_number + 1;
+
+            return $episode_number;
+        }
+
+        // hidden fields
+        $serieId = $request->input('serieId');
+        $seasonNumber = $request->input('seasonNumber');
         
         $episode = new Episode;
         $episode->title = $request->input('episodeTitle');
+        $episode->ep_number = calc_EpisodeNumber($serieId, $seasonNumber);
         $episode->airdate = $request->input('airdate');
         $episode->Season_id = $request->input('seasons');
         $episode->save();

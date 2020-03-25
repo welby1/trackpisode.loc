@@ -15,6 +15,9 @@
           <a class="nav-link" href="{{ route('myshows_route') }}">My Shows</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{ route('show_progress') }}">show progress</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/todo">Ratings</a>
         </li>
       </ul>

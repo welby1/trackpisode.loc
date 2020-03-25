@@ -114,6 +114,12 @@
         justify-content: space-around;
         margin:0;
       }
+      .customRowTopRated2 {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        margin:0;
+      }
       .container .customRowTopRated .col-3{
         height: 250px;
         padding: 0;

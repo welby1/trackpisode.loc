@@ -94,14 +94,13 @@
 						<div class="haveseen-btn" title="Mark as watched episode" data-episodeid="{{ $episode->id }}"></div>
 					@endif
 					</td>
-					<td class="episode-number">{{ $loop->parent->iteration }}x{{ $i++ }}</td>
+					<td class="episode-number">{{ $episode->seasonNumber }}x{{ $episode->ep_number }}</td>
 					<td class="episode-title">{{ $episode->title }}</td>
 					<td class="episode-airdate">{{ date('d.m.Y', strtotime($episode->airdate)) }}</td>
 					<td class="placeholder"></td>
 				</tr>
 				@endif
 			@endforeach
-			@php $i=1 @endphp
 		</table>
 	</div>
 	@endforeach
@@ -139,13 +138,13 @@
 
 	$(document).ready(function(){
 		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-		// Get value of data-serieid attribute
+		{{-- Get value of data-serieid attribute --}}
 		var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
 
-		// Saving Serie Status
+		{{-- Saving Serie Status --}}
 		$(".statusBlockButtons span").on("click", function(){
 			
-			// Prevent sending ajax requests on multiple clicking the same status button
+			{{-- Prevent sending ajax requests on multiple clicking the same status button --}}
 			if(!$(this).hasClass("activeStatusButton")){
 				var serieStatus = $(this).attr("data-status");
 				$.ajax({
@@ -160,12 +159,12 @@
 			$(this).nextAll().removeClass("activeStatusButton");
 		});
 
-		// Marking episodes 
+		{{-- Marking episodes --}}
 		$(".haveseen-btn").on("click", function(){
 
 			$(this).toggleClass("active-eye");
 
-			//changing title attribute
+			{{-- changing title attribute --}}
 			if($(this).hasClass("active-eye")){
 				$(this).attr("title", "Mark as unwatched episode");
 			} else{
@@ -183,7 +182,7 @@
 			});
 		});
 
-		// Visualizing hover effect for rating stars
+		{{-- Visualizing hover effect for rating stars --}}
 		$(".ratingList span").on("mouseover", function(){
 			$(this).not(".checked").addClass("hover-star");
 			$(this).prevAll().addClass("hover-star");
@@ -194,9 +193,9 @@
 		});
 
 		var operation = $(".ratingList span").hasClass("checked") ? "update" : "save";
-		// Action to perform click
+		{{-- Action to perform click --}}
 		$(".ratingList span").on("click", function(){
-			// get vote value of clicked star
+			{{-- get vote value of clicked star --}}
 			var voteValue = parseInt($(this).data("value"), 10);
 			$(this).addClass("checked");
 			$(this).prevAll().addClass("checked");
@@ -213,7 +212,7 @@
 			});
 		});
 
-		// Accordion for seasons
+		{{-- Accordion for seasons --}}
 		$(".accordion").on("click", function(){
 			$(this).toggleClass("active-accordion");
 
@@ -224,7 +223,7 @@
 			}	
 		});
 
-		// Load more Comments on clicking button
+		{{-- Load more Comments on clicking button --}}
 		$(document).on('click', '#btn-more', function(){
 
        	var last_comment_id = $(this).data('last-comment-id');
@@ -243,7 +242,7 @@
 			});
 	   	});
 
-		// Add Comment ajax
+		{{-- Add Comment ajax --}}
 		$('.fx-sliderIn').on('click', function(){
 
 			var getCommentText = $('#comment_textarea').val();
@@ -260,7 +259,6 @@
 
 		});
 
-		//
 
 
 	});
