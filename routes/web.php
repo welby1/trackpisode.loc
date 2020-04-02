@@ -34,6 +34,8 @@ Route::post('/save_vote', 'RatingController@saveVote_ajax');
 Route::post('/status', 'StatusController@setStatus_ajax');
 Route::post('/filter-data', 'filterDataController@getFilteredData');
 Route::post('/get-more-data', 'seriesController@getMoreData');
+Route::post('/cookie-spoilers', 'showProgressController@saveSpoilers');
+
 
 //ajax comment route
 Route::post('/comments/load/ajax', 'commentController@loadComments_ajax');

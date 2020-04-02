@@ -20,7 +20,7 @@
 				@foreach ($seasons as $season)
 				@if($season->Serie_id == $s->id)
 				<div class="row col-lg-8">
-					<h2 class="header accordion">Season {{ $season->seasonNumber }}</h2>
+					<h2 class="header accordion" data-spoilerid="{{$s->id}}_{{$season->seasonNumber}}">Season {{ $season->seasonNumber }}</h2>
 				</div>
 
 				<div class="row col-lg-8 table-responsive accordion-panel">
@@ -52,28 +52,17 @@
 
 <script>
 
+	function getCookie(name) {
+	  let matches = document.cookie.match(new RegExp(
+	    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+	  ));
+	  return matches ? decodeURIComponent(matches[1]).split(',') : undefined;
+	}
+
 	$(document).ready(function(){
 		var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 		{{-- Get value of data-serieid attribute --}}
-		var Serie_id = parseInt($("#serie-Header").attr("data-serieid"), 10);
 
-		{{-- Saving Serie Status --}}
-		$(".statusBlockButtons span").on("click", function(){
-			
-			{{-- Prevent sending ajax requests on multiple clicking the same status button --}}
-			if(!$(this).hasClass("activeStatusButton")){
-				var serieStatus = $(this).attr("data-status");
-				$.ajax({
-					url: '{{URL::to('status')}}',
-					data: {_token: CSRF_TOKEN, serieStatus: serieStatus, Serie_id: Serie_id},
-					type: 'post'
-				});
-			}
-
-			$(this).not("activeStatusButton").addClass("activeStatusButton");
-			$(this).prevAll().removeClass("activeStatusButton");
-			$(this).nextAll().removeClass("activeStatusButton");
-		});
 
 		{{-- Marking episodes --}}
 		$(".haveseen-btn").on("click", function(){
@@ -98,86 +87,45 @@
 			});
 		});
 
-		{{-- Visualizing hover effect for rating stars --}}
-		$(".ratingList span").on("mouseover", function(){
-			$(this).not(".checked").addClass("hover-star");
-			$(this).prevAll().addClass("hover-star");
-			$(".checked").removeClass("hover-star");
-			$(this).nextAll().removeClass("hover-star");
-		}).on("mouseout", function(){
-			$(this).parent().children("span").removeClass("hover-star");
-		});
-
-		var operation = $(".ratingList span").hasClass("checked") ? "update" : "save";
-		{{-- Action to perform click --}}
-		$(".ratingList span").on("click", function(){
-			{{-- get vote value of clicked star --}}
-			var voteValue = parseInt($(this).data("value"), 10);
-			$(this).addClass("checked");
-			$(this).prevAll().addClass("checked");
-			$(this).nextAll().removeClass("checked");
-
-			$.ajax({
-				url: '{{URL::to('save_vote')}}',
-				data: { _token: CSRF_TOKEN, Serie_id: Serie_id, voteValue: voteValue, operation: operation },
-				type: 'post',
-				success: function(data){
-					data = JSON.parse(data);
-					$("#serie_rating").html(data.rating);
-				}
-			});
-		});
 
 		{{-- Accordion for seasons --}}
 		$(".accordion").on("click", function(){
 			$(this).toggleClass("active-accordion");
 
+			let spoiler_id = $(this).attr("data-spoilerid");
+
 			if($(this).hasClass("active-accordion")){
 				$(this).parent().next().fadeIn();
 			} else {
 				$(this).parent().next().fadeOut();
-			}	
-		});
+			}
 
-		{{-- Load more Comments on clicking button --}}
-		$(document).on('click', '#btn-more', function(){
-
-       	var last_comment_id = $(this).data('last-comment-id');
-       	$("#btn-more").html('<i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="font-size:1.75rem"></i>');
-	       
-	       $.ajax({
-	       		url : '{{ URL::to('comments/load/ajax') }}',
-	           	method : "POST",
-	           	data : { last_comment_id: last_comment_id, Serie_id: Serie_id, _token: CSRF_TOKEN },
-	           	success : function (data){
-	              	if(data != ''){
-	                  	$('#remove-row').remove();
-	                  	$('#load-data').append(data);
-	                }
-				}
-			});
-	   	});
-
-		{{-- Add Comment ajax --}}
-		$('.fx-sliderIn').on('click', function(){
-
-			var getCommentText = $('#comment_textarea').val();
+			let active = $(this).hasClass("active-accordion") ? 1 : 0;
 
 			$.ajax({
-				url: '{{ URL::to('comment/add/ajax') }}',
-				method: 'POST',
-				data: { Serie_id: Serie_id, getCommentText: getCommentText, _token: CSRF_TOKEN },
-				success: function(data){
-					$('#comment_textarea').val('');
-					$(data).hide().prependTo('#load-data').fadeIn('slow');
-				}
+				url: '{{URL::to('cookie-spoilers')}}',
+				data: { _token: CSRF_TOKEN, spoiler_id: spoiler_id, active: active },
+				type: 'post'
 			});
 
 		});
 
+		{{-- open spoilers that are in cookie when reloading page --}}
+		let cookieValues = getCookie('spoilers');
 
+   		if( typeof cookieValues != 'undefined' ){
+   			cookieValues.forEach(function(value){
+	   			$(".accordion").each(function( index ) {
+		   			if($(this).attr("data-spoilerid") == value){
+		   				$(this).addClass("active-accordion");
+		   				$(this).parent().next().fadeIn();
+		   			}
+	   			})
+	   		})
+   		}
 
 	});
+
 </script>
 
 @endsection

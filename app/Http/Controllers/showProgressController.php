@@ -109,69 +109,36 @@ class showProgressController extends Controller
         ));  
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    // save opened spoiler id in cookie
+    public function saveSpoilers(Request $request){
+        if($request->ajax()){
+            
+            $cookieValues_array = array();
+            $data = '';
+            if($request->active == 1){
+
+                if(isset($_COOKIE['spoilers'])){
+                    $cookieValues = $request->cookie('spoilers');
+                    $cookieValues_array = explode(",", $cookieValues);
+                    if (!in_array($request->spoiler_id, $cookieValues_array)) {
+                        $data = $cookieValues . ',' . $request->spoiler_id;
+                    } else {
+                        $data = $cookieValues;
+                    }
+                    
+                } else{
+                    $data = $request->spoiler_id;
+                }
+            } else if($request->active == 0){
+                $cookieValues = $request->cookie('spoilers');
+                $cookieValues_array = explode(",", $cookieValues);
+                $removeID[] = $request->spoiler_id;
+                $data = array_diff($cookieValues_array, $removeID);
+                $data = implode(",", $data);
+            }
+            // 1year = 525600 minutes; httponly=false
+            return Response('saved')->cookie('spoilers', $data, 525600, NULL, NULL, NULL, FALSE);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\showProgress  $showProgress
-     * @return \Illuminate\Http\Response
-     */
-    public function show(showProgress $showProgress)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\showProgress  $showProgress
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(showProgress $showProgress)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\showProgress  $showProgress
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, showProgress $showProgress)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\showProgress  $showProgress
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(showProgress $showProgress)
-    {
-        //
-    }
 }
