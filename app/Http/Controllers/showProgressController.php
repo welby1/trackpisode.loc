@@ -73,6 +73,7 @@ class showProgressController extends Controller
                 $query->select('UsersEpisodes.Episode_id')->from('UsersEpisodes')->where('UsersEpisodes.User_id', '=', Auth::id());
             })
             ->groupBy('Series.title','Series.id')
+            ->orderBy('Series.title', 'ASC')
             ->get();
 
         // shows only seasons which have unmarked episodes
@@ -85,7 +86,7 @@ class showProgressController extends Controller
                 $query->select('UsersEpisodes.Episode_id')->from('UsersEpisodes')->where('UsersEpisodes.User_id', '=', Auth::id());
             })
             ->groupBy('seasonNumber','Serie_id')
-            ->orderBy('Serie_id', 'ASC')
+            ->orderBy('seasonNumber', 'DESC')
             ->get();
 
         // shows serie and title of unseen episodes for current user
@@ -102,10 +103,20 @@ class showProgressController extends Controller
             ->orderBy('Episodes.id', 'ASC')
             ->get();
 
+        $watchingSeries = Serie::select('Series.id', 'Series.title', 'UserSerieStatus.status as UserStatus')
+            ->join('UserSerieStatus', 'UserSerieStatus.Serie_id', '=', 'Series.id')
+            ->where([
+                ['UserSerieStatus.User_id', '=', Auth::id()],
+                ['UserSerieStatus.status', '=', 'watching']
+            ])
+            ->orderBy('Series.title', 'asc')
+            ->get();
+
         return view('series.show_progress', array(
             'series' => $getSeries,
             'seasons' => $getSeasons,
-            'episodes' => $getEpisodes
+            'episodes' => $getEpisodes,
+            'watching' => $watchingSeries
         ));  
     }
 

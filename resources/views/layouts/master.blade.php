@@ -538,7 +538,7 @@
         background: #c0c0c0;
         transition: .5s background;
       }
-      .comment-counter{
+      .item-counter{
         font-size: 1.1rem;
         color: #595959;
       }
@@ -728,6 +728,41 @@
       #empty p{
         vertical-align: middle;
       }
+      /* ---------- */
+      .watching_col{
+        box-shadow: -30px 0px 25px -30px rgba(82,82,82,0.7);
+      }
+      .watching_col ul{
+        list-style-type: none;
+        padding: 15px 10px;
+      }
+      .watching_col a{
+        text-decoration: none;
+        margin: 10px 0;
+        font-size: 1.1vw;
+        color: gray;
+        font-weight: 600;
+      }
+      .watching_col a:hover{
+        font-weight: 400;
+      }
+      .watching_col h4, .header_progress{
+        color: gray;
+        font-weight: 600;
+        cursor: default;
+      }
+      .header_progress{
+        padding: 0 16px;
+        margin-bottom: 25px;
+      }
+      .infoBlock{
+        padding: 0;
+      }
+      .textBlock2{
+        color: #999;
+        cursor: default;font-weight: 100;
+      }
+
 
 
     </style>

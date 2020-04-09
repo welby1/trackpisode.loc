@@ -1,53 +1,71 @@
 <?php
-//dump($seasons);
+// /dump($watching);
 ?>
 
 @extends('layouts.master')
 @section('content')
-<div class="row">
-	<div class="row customRowTopRated2">
-		@foreach ($series as $s)
-			<div class="col-lg-3" data-unmarked="{{ $s->unmarkedEpisodes }}">
-		        <div class="imgBlock rounded" onclick="document.location.href='show/{{ $s->id }}'">
-		        	<div class="hover-shadow"></div>
-		            <img class="img-fluid" src="{{ $s->posterPath }}">
-		        </div>
-		        <p class="textBlock text-center col-lg-12"><a href="show/{{ $s->id }}">{{ $s->title }}</a></p>
-		    </div>
-			<div class="col-lg-12"></div>
+<div class="row col-lg-12">
+	<aside class="col-lg-9">
+		<div class="row">
+			<h4 class="header_progress">New episodes<sup class="item-counter">{{$episodes->count()}}</sup></h4>
+		</div>
+		<div class="row customRowTopRated2">
 
-			@if(count($seasons))
-				@foreach ($seasons as $season)
-				@if($season->Serie_id == $s->id)
-				<div class="row col-lg-8">
-					<h2 class="header accordion" data-spoilerid="{{$s->id}}_{{$season->seasonNumber}}">Season {{ $season->seasonNumber }}</h2>
+			@foreach ($series as $s)
+				<div class="row col-lg-12" style="padding: 15px">
+					<div class="col-lg-5">
+				        <div class="imgBlock rounded" onclick="document.location.href='show/{{ $s->id }}'">
+				        	<div class="hover-shadow"></div>
+				            <img class="img-fluid" src="{{ $s->posterPath }}">
+				        </div>  
+				    </div>
+				    <div class="infoBlock col-lg-7">
+				    	<p class="textBlock col-lg-12"><a href="show/{{ $s->id }}">{{ $s->title }}</a></p>
+				    	<p class="textBlock2 col-lg-12">Unwatched episodes: <span>{{$s->unmarkedEpisodes}}</span></p>
+				    </div>
 				</div>
+				
+				@if(count($seasons))
+					@foreach ($seasons as $season)
+					@if($season->Serie_id == $s->id)
+					<div class="row col-lg-12">
+						<h2 class="header accordion" data-spoilerid="{{$s->id}}_{{$season->seasonNumber}}">Season {{ $season->seasonNumber }}</h2>
+					</div>
 
-				<div class="row col-lg-8 table-responsive accordion-panel">
-					<table cellpadding="0" cellspacing="0" width="100%" class="table seasons-list">
-						@foreach ($episodes as $episode)
-							{{-- check to show episodes for corresponding seasons --}}
-							@if (($season->seasonNumber == $episode->seasonNumber) && $episode->id == $s->id)
-							<tr>
-								<td class="placeholder"></td>
-								<td class="haveseen-area">
-									<div class="haveseen-btn" title="Mark as watched episode" data-episodeid="{{ $episode->episode_id }}"></div>
-								</td>
-								<td class="episode-number">{{ $episode->seasonNumber }}x{{ $episode->ep_number }}</td>
-								<td class="episode-title">{{ $episode->episode_title }}</td>
-								<td class="episode-airdate">{{ date('d.m.Y', strtotime($episode->airdate)) }}</td>
-								<td class="placeholder"></td>
-							</tr>
-							@endif
-						@endforeach
-					</table>
-				</div>
-				<div class="col-lg-12"></div>
+					<div class="row col-lg-12 table-responsive accordion-panel">
+						<table cellpadding="0" cellspacing="0" width="100%" class="table seasons-list">
+							@foreach ($episodes as $episode)
+								{{-- check to show episodes for corresponding seasons --}}
+								@if (($season->seasonNumber == $episode->seasonNumber) && $episode->id == $s->id)
+								<tr>
+									<td class="placeholder"></td>
+									<td class="haveseen-area">
+										<div class="haveseen-btn" title="Mark as watched episode" data-episodeid="{{ $episode->episode_id }}"></div>
+									</td>
+									<td class="episode-number">{{ $episode->seasonNumber }}x{{ $episode->ep_number }}</td>
+									<td class="episode-title">{{ $episode->episode_title }}</td>
+									<td class="episode-airdate">{{ date('d.m.Y', strtotime($episode->airdate)) }}</td>
+									<td class="placeholder"></td>
+								</tr>
+								@endif
+							@endforeach
+						</table>
+					</div>
+					@endif
+					@endforeach
 				@endif
-				@endforeach
-			@endif
-		@endforeach
-	</div>
+			@endforeach
+		</div>
+	</aside>
+
+	<aside class="watching_col col-lg-3">
+		<h4>Watching<sup class="item-counter">{{$watching->count()}}</sup></h4>
+		<ul>
+			@foreach ($watching as $s)
+			<li><a href="show/{{ $s->id }}">{{ $s->title }}</a></li>
+			@endforeach
+		</ul>
+	</aside>
 </div>
 
 <script>
