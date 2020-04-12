@@ -44,11 +44,11 @@ class seriesController extends Controller
         $data = $request->all();
         if($request->hasFile('posterPath')){
             $file = $request->file('posterPath');
-            $destinationPath = '/upload/';
+            $destinationPath = '/storage/posters/';
             $fileName = $file->getClientOriginalName();
-            $file->move($destinationPath, $fileName);
+            $file->storeAs('posters', $fileName);
         } else{
-            $destinationPath = '/upload/';
+            $destinationPath = '/storage/posters/';
             $fileName = 'default-image.jpg';
         }
         //add serie

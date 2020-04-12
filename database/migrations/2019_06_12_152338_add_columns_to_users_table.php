@@ -17,7 +17,6 @@ class AddColumnsToUsersTable extends Migration
             $table->string('role')->nullable()->after('name');
             $table->string('provider')->nullable()->after('role');
             $table->string('provider_id')->nullable()->after('provider');
-            $table->string('password')->nullable()->after('email');
         });
     }
 
@@ -32,7 +31,6 @@ class AddColumnsToUsersTable extends Migration
             $table->dropColumn('role');
             $table->dropColumn('provider');
             $table->dropColumn('provider_id');
-            $table->dropColumn('password');
         });
     }
 }
