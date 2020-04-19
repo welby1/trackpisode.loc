@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Rating;
+use App\User;
+use App\Serie;
 use DB;
 
 class RatingController extends Controller
@@ -51,5 +53,36 @@ class RatingController extends Controller
 	    	}
     		return Response(json_encode($response));
     	}
-    }
+	}
+	
+	public function index(){
+
+		/*
+			SELECT 	s.id,
+					s.title,
+					round( avg(r.vote), 1 ) as rating,
+					count( DISTINCT uss.User_id ) as watching,
+					round( count(DISTINCT uss.User_id) / (select count(*) from users) * 100, 2 ) as audience
+			FROM Series s
+			inner JOIN Ratings r ON s.id = r.Serie_id
+			left JOIN UserSerieStatus uss ON s.id = uss.Serie_id
+			GROUP by s.title
+			order by rating desc
+			limit 50;
+		*/
+
+		$totalUsers = User::select()->count();
+
+		$getSeries = Serie::select('Series.id', 'Series.title', DB::raw("round(avg(Ratings.vote), 1) as rating, count(distinct UserSerieStatus.User_id) as watching, round(count(distinct UserSerieStatus.User_id) / '$totalUsers' * 100, 2) as audience"))
+			->join('Ratings', 'Ratings.Serie_id', '=', 'Series.id')
+			->leftJoin('UserSerieStatus', 'Series.id', '=', 'UserSerieStatus.Serie_id')
+			->groupBy('Series.title')
+			->orderBy('rating', 'DESC')
+			->limit(50)
+			->get();
+		
+		return view('series.ratings', array(
+			'series' => $getSeries
+		)); 
+	}
 }

@@ -6,7 +6,8 @@
 @section('content')
 <div class="row col-lg-12">
 	<aside class="col-lg-9">
-		<div class="row">
+		<div class="row m-0">
+			<img src="/svg/schedule.svg" height="32px" width="32px">
 			<h4 class="header_progress">New episodes<sup class="item-counter">{{$episodes->count()}}</sup></h4>
 		</div>
 		<div class="row customRowTopRated2">
@@ -59,7 +60,10 @@
 	</aside>
 
 	<aside class="watching_col col-lg-3">
-		<h4>Watching<sup class="item-counter">{{$watching->count()}}</sup></h4>
+		<div class="row col-12">
+			<img src="/svg/watch-table-eye.svg" height="32px" width="32px">
+			<h4>Watching<sup class="item-counter">{{$watching->count()}}</sup></h4>
+		</div>
 		<ul>
 			@foreach ($watching as $s)
 			<li><a href="show/{{ $s->id }}">{{ $s->title }}</a></li>

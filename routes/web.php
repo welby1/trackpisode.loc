@@ -49,6 +49,7 @@ Route::get('/show/{id}', 'seriesController@showContent');
 
 Route::get('/my-shows', 'myshowsController@index')->name('myshows_route');
 Route::get('/show-progress', 'showProgressController@index')->name('show_progress');
+Route::get('/ratings', 'RatingController@index')->name('ratings');
 
 /* Socialite authorization through Google or Vkontakte */
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');

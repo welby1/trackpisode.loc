@@ -329,6 +329,13 @@
         border-collapse: collapse;
         margin-bottom: 55vh;
       }
+      .myshows-list td i{
+        position: absolute;
+        right: 5px;
+        font-size: 16px;
+        line-height: 24px;
+        color: #999;
+      }
       .myshows-list td{
         border-bottom: 3px solid #EAE7DC;
         border-top:none;
@@ -358,6 +365,9 @@
       
       .myshows-list tr td:not(:first-child):not(:last-child){
         text-align: center;
+      }
+      .reset-align tr td:nth-child(2){
+        text-align: left !important;
       }
       .showProgress{
         overflow: hidden;
@@ -539,8 +549,8 @@
         transition: .5s background;
       }
       .item-counter{
-        font-size: 1.1rem;
-        color: #595959;
+        font-size: 1rem;
+        color: #999;
       }
       /* comment template */
       .comment-template{
@@ -648,6 +658,37 @@
         color: #d6d6d6;
         cursor: default;
       }
+      .rating-title{
+        position: absolute;
+        color: #ff6363;
+        text-shadow: #e0e0e0 1px 1px 0, 3px 3px 1px black;
+        font-size: 30px;
+        font-weight:800;
+        line-height: 150px;
+        letter-spacing: 5px;
+        text-align: center;
+        cursor: default;
+        z-index: 3;
+      }
+      .ratingNumrow{
+        color: #999 !important;
+      }
+      .ratingBar img{
+        position: relative;
+        height: 150px;
+        width: 150px;
+        text-align: center;
+        z-index: 2;
+      }
+      div.ratingBar img:not(:nth-of-type(1)){
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        margin-left: 12px;
+        overflow-x: hidden;
+        opacity: .6;
+        z-index: 1;
+      }
       .filter-box{
         height: 30px;
         line-height: 30px;
@@ -749,10 +790,11 @@
       .watching_col h4, .header_progress{
         color: gray;
         font-weight: 600;
+        line-height: 32px;
+        padding: 0 16px;
         cursor: default;
       }
       .header_progress{
-        padding: 0 16px;
         margin-bottom: 25px;
       }
       .infoBlock{

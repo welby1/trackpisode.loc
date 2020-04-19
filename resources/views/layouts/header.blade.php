@@ -18,7 +18,7 @@
           <a class="nav-link" href="{{ route('show_progress') }}">Show Progress</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/todo">Ratings</a>
+          <a class="nav-link" href="{{ route('ratings') }}">Ratings</a>
         </li>
       </ul>
       <form class="form-inline col-lg-5" style="padding: 0">
