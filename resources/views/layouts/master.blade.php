@@ -240,6 +240,13 @@
         margin: 0;
         padding-left: 15px;
        }
+      .details-pane #imdb{
+        margin-top:-12px;
+      }
+      .details-pane #imdb img{
+        height:45px;
+        width:45px;
+      }
       .descr-pane p{
         padding-left: 16px;
         text-align: justify;
@@ -548,10 +555,6 @@
         background: #c0c0c0;
         transition: .5s background;
       }
-      .item-counter{
-        font-size: 1rem;
-        color: #999;
-      }
       /* comment template */
       .comment-template{
         margin-top: 25px;
@@ -799,6 +802,10 @@
       }
       .infoBlock{
         padding: 0;
+      }
+      .infoBlock .badge{
+        font-size:60%;
+        padding: .2em .2em;
       }
       .textBlock2{
         color: #999;

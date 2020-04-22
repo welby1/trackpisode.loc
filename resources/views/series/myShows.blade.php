@@ -20,7 +20,13 @@
 							<tr class="d-flex">
 								<td class="col-5"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></td>
 								<td class="col-1">{{ $serie->releaseYear }}</td>
-								<td class="col-2">{{ $serie->status }}</td>
+								<td class="col-2">
+									@if( $serie->status == 'Running')
+										<sup><span class="badge badge-success">ON AIR</span></sup>
+									@else
+										<sup><span class="badge badge-danger">DEAD</span></sup>
+									@endif
+								</td>
 								<td class="col-4">
 									<div class="showProgress">
 										<span class="_name">Seen Episodes</span>
@@ -70,7 +76,13 @@
 							<tr class="d-flex">
 								<td class="col-5"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></td>
 								<td class="col-1">{{ $serie->releaseYear }}</td>
-								<td class="col-2">{{ $serie->status }}</td>
+								<td class="col-2">
+									@if( $serie->status == 'Running')
+										<sup><span class="badge badge-success">ON AIR</span></sup>
+									@else
+										<sup><span class="badge badge-danger">DEAD</span></sup>
+									@endif
+								</td>
 								<td class="col-4">
 									<div class="showProgress">
 										<span class="_name">Seen Episodes</span>
@@ -120,7 +132,13 @@
 							<tr class="d-flex">
 								<td class="col-5"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></td>
 								<td class="col-1">{{ $serie->releaseYear }}</td>
-								<td class="col-2">{{ $serie->status }}</td>
+								<td class="col-2">
+									@if( $serie->status == 'Running')
+										<sup><span class="badge badge-success">ON AIR</span></sup>
+									@else
+										<sup><span class="badge badge-danger">DEAD</span></sup>
+									@endif
+								</td>
 								<td class="col-4">
 									<div class="showProgress">
 										<span class="_name">Seen Episodes</span>

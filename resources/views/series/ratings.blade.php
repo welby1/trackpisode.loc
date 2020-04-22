@@ -18,7 +18,14 @@
                     @foreach($series as $serie)
                     <tr class="d-flex">
                         <td class="col-1 ratingNumrow"></td>
-                        <td class="col-5"><a href="show/{{ $serie->id }}">{{ $serie->title }}</a></td>
+                        <td class="col-5">
+                            <a href="show/{{ $serie->id }}">{{ $serie->title }}</a>
+                            @if( $serie->status == 'Running')
+                                <sup><span class="badge badge-success">ON AIR</span></sup>
+                            @else
+                                <sup><span class="badge badge-danger">DEAD</span></sup>
+                            @endif
+                        </td>
                         <td class="col-2">{{ $serie->rating }}</td>
                         <td class="col-2">{{ $serie->watching }}</td>
                         <td class="col-2">{{ $serie->audience }}%</td>

@@ -60,6 +60,7 @@ class RatingController extends Controller
 		/*
 			SELECT 	s.id,
 					s.title,
+					s.status,
 					round( avg(r.vote), 1 ) as rating,
 					count( DISTINCT uss.User_id ) as watching,
 					round( count(DISTINCT uss.User_id) / (select count(*) from users) * 100, 2 ) as audience
@@ -73,7 +74,7 @@ class RatingController extends Controller
 
 		$totalUsers = User::select()->count();
 
-		$getSeries = Serie::select('Series.id', 'Series.title', DB::raw("round(avg(Ratings.vote), 1) as rating, count(distinct UserSerieStatus.User_id) as watching, round(count(distinct UserSerieStatus.User_id) / '$totalUsers' * 100, 2) as audience"))
+		$getSeries = Serie::select('Series.id', 'Series.title', 'Series.status', DB::raw("round(avg(Ratings.vote), 1) as rating, count(distinct UserSerieStatus.User_id) as watching, round(count(distinct UserSerieStatus.User_id) / '$totalUsers' * 100, 2) as audience"))
 			->join('Ratings', 'Ratings.Serie_id', '=', 'Series.id')
 			->leftJoin('UserSerieStatus', 'Series.id', '=', 'UserSerieStatus.Serie_id')
 			->groupBy('Series.title')

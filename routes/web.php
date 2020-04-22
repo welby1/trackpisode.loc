@@ -35,6 +35,7 @@ Route::post('/status', 'StatusController@setStatus_ajax');
 Route::post('/filter-data', 'filterDataController@getFilteredData');
 Route::post('/get-more-data', 'seriesController@getMoreData');
 Route::post('/cookie-spoilers', 'showProgressController@saveSpoilers');
+Route::post('/imdb-rating', 'seriesController@get_IMDBrating');
 
 
 //ajax comment route

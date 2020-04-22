@@ -219,6 +219,15 @@ class seriesController extends Controller
             'serieStatus' => $getSerieStatus->toArray()
         ));
     }
+    
+    public function get_IMDBrating(Request $request){
+        if($request->ajax()){
+            $serie = Serie::findOrFail($request->id);
+            $IMDBdata = Serie::scraping_IMDB(Serie::search_IMDB($serie->title));
+
+            return Response(json_encode($IMDBdata));
+        }
+    }
 
     public function addSeasonsForm(){
 

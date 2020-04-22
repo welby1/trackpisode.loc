@@ -1,14 +1,10 @@
-<?php
-// /dump($watching);
-?>
-
 @extends('layouts.master')
 @section('content')
 <div class="row col-lg-12">
 	<aside class="col-lg-9">
 		<div class="row m-0">
 			<img src="/svg/schedule.svg" height="32px" width="32px">
-			<h4 class="header_progress">New episodes<sup class="item-counter">{{$episodes->count()}}</sup></h4>
+			<h4 class="header_progress">New episodes <sup class="item-counter"><span class="badge badge-pill badge-secondary">{{$episodes->count()}}</span></sup></h4>
 		</div>
 		<div class="row customRowTopRated2">
 
@@ -21,7 +17,13 @@
 				        </div>  
 				    </div>
 				    <div class="infoBlock col-lg-7">
-				    	<p class="textBlock col-lg-12"><a href="show/{{ $s->id }}">{{ $s->title }}</a></p>
+				    	<p class="textBlock col-lg-12"><a href="show/{{ $s->id }}">{{ $s->title }}</a>
+							@if( $s->status == 'Running')
+								<sup><span class="badge badge-success">ON AIR</span></sup>
+							@else
+								<sup><span class="badge badge-danger">DEAD</span></sup>
+							@endif
+						</p>
 				    	<p class="textBlock2 col-lg-12">Unwatched episodes: <span>{{$s->unmarkedEpisodes}}</span></p>
 				    </div>
 				</div>
@@ -62,7 +64,7 @@
 	<aside class="watching_col col-lg-3">
 		<div class="row col-12">
 			<img src="/svg/watch-table-eye.svg" height="32px" width="32px">
-			<h4>Watching<sup class="item-counter">{{$watching->count()}}</sup></h4>
+			<h4>Watching <sup class="item-counter"><span class="badge badge-pill badge-secondary">{{$watching->count()}}</span></sup></h4>
 		</div>
 		<ul>
 			@foreach ($watching as $s)

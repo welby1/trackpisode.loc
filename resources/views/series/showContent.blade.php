@@ -53,7 +53,19 @@
 			</p>
 		</div>
 		<div class="row col-lg-6">
-			<p><span>Status:</span> {{ $serie->status }}</p>
+			<p>
+				<span>Status:</span>
+				@if( $serie->status == 'Running')
+					<span class="badge badge-success">ON AIR</span>
+				@else
+					<span class="badge badge-danger">DEAD</span>
+				@endif
+			</p>
+		</div>
+		<div class="row col-lg-6">
+			<p id="imdb" title="">
+				<img src="/svg/imdb.svg">
+			</p>
 		</div>
 	</div>	
 </div>
@@ -108,7 +120,7 @@
 
 <div class="row col-lg-8" style="margin-top: 35px;">
 	<h2 class="header">Comments
-		@if($totalComments > 0)<sup class="item-counter">{{$totalComments}}</sup>@endif
+		@if($totalComments > 0)<sup class="item-counter"><span class="badge badge-pill badge-secondary">{{$totalComments}}</span></sup>@endif
 	</h2>
 </div>
 <div class="row col-lg-8 mt-5">
@@ -259,6 +271,18 @@
 
 		});
 
+		{{-- getting IMDb rating async --}}
+		$.ajax({
+			url: '{{ URL::to('/imdb-rating') }}',
+			method: 'POST',
+			data: { id: Serie_id, _token: CSRF_TOKEN },
+			success: function(data){
+				data = JSON.parse(data);
+				$('#imdb').val('');
+				$('#imdb').append(data.rating +'<sub> (' + data.ratingCount+ ')</sub>');
+				$('#imdb').attr('title', data.ratingCount + ' Votes');
+			}
+		});
 
 
 	});
