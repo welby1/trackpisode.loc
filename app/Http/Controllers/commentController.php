@@ -74,7 +74,7 @@ class commentController extends Controller
     			$comment->body = $request->getCommentText;
     			$comment->save();
 
-    			$response =	'<div class="row col-lg-8">
+    			$response =	'<div class="row col-lg-12">
 							 	<div class="col-lg-12 descr-pane comment-template">
 									<h5>'.Auth::user()->name.'</h5>
 									<p>'.$request->getCommentText.'</p>

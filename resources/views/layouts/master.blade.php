@@ -195,6 +195,27 @@
         top: 15px;
         left: 75px;
        }
+      #new_episodes .overlay-pane{
+        height: 30px;
+        bottom: 20px;
+        position: absolute;
+      }
+      #new_episodes .imgBlock:hover img{
+        transform: none;
+        transition: none;
+      }
+      #new_episodes .imgBlock{
+        box-shadow: none;
+        padding-bottom:20px;
+      }
+      #new_episodes .overlay-pane div{
+        color: #f1f1f1;
+      }
+      #new_episodes h4{
+        text-align: center;
+        line-height: 42px !important;
+        margin: 0;
+      }
       .overlay-pane .ratingList{
         font-size: 30px;
        }
@@ -790,7 +811,7 @@
       .watching_col a:hover{
         font-weight: 400;
       }
-      .watching_col h4, .header_progress{
+      .watching_col h4, .header_progress, #new_episodes h4{
         color: gray;
         font-weight: 600;
         line-height: 32px;

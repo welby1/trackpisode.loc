@@ -205,6 +205,14 @@ class seriesController extends Controller
             ])
             ->get();
 
+        $getNewEpisodes = Serie::select('Series.id' ,'Series.title', 'Series.posterPath', 'Seasons.seasonNumber', 'Episodes.ep_number', 'Episodes.airdate')
+                ->join('Seasons', 'Seasons.Serie_id', '=', 'Series.id')
+                ->join('Episodes', 'Episodes.Season_id', '=', 'Seasons.id')
+                ->whereRaw('Episodes.airdate <= CURDATE()')
+                ->orderBy('Episodes.airdate', 'DESC')
+                ->limit(10)
+                ->get();
+
         return view('series.showContent', array(
             'serie' => $serie,
             'genres' => $getGenreNamesById,
@@ -216,7 +224,8 @@ class seriesController extends Controller
             'userVote' => $userVote->toArray(),
             'comments' => $getComments,
             'totalComments' => $totalComments,
-            'serieStatus' => $getSerieStatus->toArray()
+            'serieStatus' => $getSerieStatus->toArray(),
+            'newEpisodes' => $getNewEpisodes
         ));
     }
     
