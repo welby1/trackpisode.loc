@@ -73,11 +73,19 @@ class LoginController extends Controller
         }
 
         if($provider == 'vkontakte'){
+            if($user->sex == 1){
+                $genderStr = 'f';
+            } else if($user->sex == 2){
+                $genderStr = 'm';
+            }
+
             return User::create([
                 'name'              => $user->name,
                 'email'             => $user->accessTokenResponseBody['email'],
                 'provider'          => strtoupper($provider),
                 'provider_id'       => $user->id,
+                'avatar'            => $user->avatar,
+                'sex'               => $genderStr,
             ]);
         } elseif($provider == 'google'){
             return User::create([
@@ -85,6 +93,7 @@ class LoginController extends Controller
                 'email'             => $user->email,
                 'provider'          => strtoupper($provider),
                 'provider_id'       => $user->id,
+                'avatar'            => $user->avatar,
             ]);
         }
     }

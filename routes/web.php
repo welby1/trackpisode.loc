@@ -26,6 +26,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/add_episodes', 'seriesController@addEpisodesForm')->name('add_episodes_route');
 	Route::post('/add_episodes', 'seriesController@addEpisodes');
 
+	//user profile
+	Route::get('/profile/{id}', 'profileController@index');
+
 //ajax routes
 Route::get('/search_serie', 'seriesController@loadSeries_ajax');
 Route::get('/load_seasons', 'seriesController@loadSeasons_ajax');

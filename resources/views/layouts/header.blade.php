@@ -48,6 +48,7 @@
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/profile/{{ Auth::id() }}">My profile</a>
                   @can('isAdmin')
                       <a class="dropdown-item" href="{{ route('add_series_route') }}">Add Serie</a>
                       <a class="dropdown-item" href="{{ route('add_seasons_route') }}">Add Season</a>

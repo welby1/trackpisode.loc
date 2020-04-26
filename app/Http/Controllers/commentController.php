@@ -31,7 +31,7 @@ class commentController extends Controller
 
             	foreach ($comments as $comment) {
 
-            		$output .= '<div class="row col-lg-8">
+            		$output .= '<div class="row col-lg-12">
 									<div class="col-lg-12 descr-pane comment-template">
 										<h5>'.$comment->name.'</h5>
 										<p>'.$comment->body.'</p>
@@ -47,11 +47,11 @@ class commentController extends Controller
 
                 if($remainingComments != 0){
 
-                	$output .= '<div class="row col-lg-8" id="remove-row">
+                	$output .= '<div class="row col-lg-12" id="remove-row">
     								<button id="btn-more" data-last-comment-id="'.$comment->id.'" class="btn-block"><h5>More Comments ('.$remainingComments.')</h5></button>
     							</div>';
                 } else{
-                    $output .= '<div class="row col-lg-8" id="remove-row">
+                    $output .= '<div class="row col-lg-12" id="remove-row">
                                     <button id="btn-more" data-last-comment-id="'.$comment->id.'" class="btn-block" disabled><h6>No Comments</h6></button>
                                 </div>';
                 }
