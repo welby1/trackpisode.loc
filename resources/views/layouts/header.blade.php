@@ -1,7 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-    <div class="container">
-    <a class="navbar-brand" href="{{ route('home') }}">TRACKPISODE</a>
+    <div class="container p-0">
+    <a class="navbar-brand m-0 p-0" href="{{ route('home') }}">
+      <div class="row" id="logo"></div>
+    </a>
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>

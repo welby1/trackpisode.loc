@@ -15,6 +15,10 @@ use App\Serie;
 
 class showProgressController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+	}
     /**
      *
      * @return \Illuminate\Http\Response
